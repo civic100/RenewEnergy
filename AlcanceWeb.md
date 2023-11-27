@@ -23,7 +23,8 @@ Esta sección será la primera impresión para los visitantes e incluirá:
   1. **Donación Específica:** Permitir a los usuarios donar una cantidad específica de dinero. Al hacer clic en el botón correspondiente, los usuarios serán dirigidos a la página de proyectos, donde podrán elegir a qué proyecto destinan su contribución.
   2. **Plan Mensual:** Permitir a los usuarios suscribirse a un plan mensual. Este plan se distribuirá automáticamente entre varios proyectos a lo largo del mes.
 
-![Mapa de Proyectos](/imgAlcance/home.png)
+
+<img src="/imgAlcance/home.png" alt="Home" width="500">
 ---
 ### Menú de Navegación
 
@@ -72,7 +73,7 @@ El menú de navegación estará ubicado en la parte superior de la página y con
   - Campos para que los usuarios ingresen la cantidad de créditos que desean añadir.
 - **Botón de Confirmación:**
   - Un botón que permita a los usuarios confirmar y añadir los créditos.
-
+<img src="/imgAlcance/solar.JPG" alt="solar" width="500">
 ---
 ### Página de Proyectos
 
@@ -82,7 +83,7 @@ El menú de navegación estará ubicado en la parte superior de la página y con
   - Encabezado que indica la sección dedicada a mostrar los proyectos en curso.
 - **Mapa Interactivo:**
   - Un mapa interactivo que presenta visualmente la ubicación de los proyectos actuales. Los usuarios podrán explorar los proyectos geográficamente.
-
+ <img src="/imgAlcance/mapa.JPG" alt="Mapa de Proyectos" width="500">
 #### Sección 2
 
 - **Listado de Proyectos:**
