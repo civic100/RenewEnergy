@@ -23,6 +23,7 @@ Esta sección será la primera impresión para los visitantes e incluirá:
   1. **Donación Específica:** Permitir a los usuarios donar una cantidad específica de dinero. Al hacer clic en el botón correspondiente, los usuarios serán dirigidos a la página de proyectos, donde podrán elegir a qué proyecto destinan su contribución.
   2. **Plan Mensual:** Permitir a los usuarios suscribirse a un plan mensual. Este plan se distribuirá automáticamente entre varios proyectos a lo largo del mes.
 
+![Mapa de Proyectos](/imgAlcance/home.png)
 ---
 ### Menú de Navegación
 
