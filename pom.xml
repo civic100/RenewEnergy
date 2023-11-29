@@ -47,13 +47,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-=======
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.33</version>
@@ -63,7 +56,6 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 </dependencies>
->>>>>>> 76e2b73 (Project_V1_CRUD)
 
 	<build>
 		<plugins>
