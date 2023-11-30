@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 
@@ -30,7 +33,7 @@ public class EnergyFootPrint {
     private Integer id_project;
 
     @Column(name = "date")
-    private Integer date;
+    private LocalDate  date;
 
     @Column(name = "carbonfootprint")
     private Integer carbonfootprint;
@@ -39,7 +42,7 @@ public class EnergyFootPrint {
     private Integer generatedenergy;
 
     @Column(name = "is_disabled")
-    private Integer is_disabled;
+    private Boolean is_disabled;
 
     public EnergyFootPrint(EnergyFootPrintDTO energyFootPrintDTO){
         this.id_energyfootprint = energyFootPrintDTO.getId_energyfootprint();
