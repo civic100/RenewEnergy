@@ -45,7 +45,7 @@ public class ProjectsController {
     }
 
 	@PatchMapping("{id}")
-    public void patchProject(@PathVariable("id") int id) {
+    public void patchProject(@PathVariable("id") Integer id) {
         projectsService.patchProject(id);
     }
 }

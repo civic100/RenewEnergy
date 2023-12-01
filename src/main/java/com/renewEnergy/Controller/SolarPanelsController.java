@@ -46,7 +46,7 @@ public class SolarPanelsController {
     }
 
 	@PatchMapping("{id}")
-    public void patchSolarPanel(@PathVariable("id") int id) {
+    public void patchSolarPanel(@PathVariable("id") Integer id) {
         solarPanelsService.patchSolarPanels(id);
     }
 }

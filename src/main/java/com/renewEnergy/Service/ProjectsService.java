@@ -56,6 +56,4 @@ public class ProjectsService {
         }
         projectsRepository.save(project);
     }
-
-    
 }
