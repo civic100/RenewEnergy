@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.renewEnergy.DataBase.UsersProjectsRepository;
-import com.renewEnergy.DataBase.UsersRepository;
 import com.renewEnergy.Model.ContributionPlans;
 import com.renewEnergy.Model.Projects;
 import com.renewEnergy.Model.Users;
