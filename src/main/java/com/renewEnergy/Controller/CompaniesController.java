@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,7 +47,7 @@ public class CompaniesController {
         companiesService.putCompanie(companiesDTO, id);
     }
 
-    @PutMapping("{id}")
+    @PatchMapping("{id}")
     public void patchCompanie(@PathVariable("id") Integer id){
         companiesService.patchCompanie(id);
     }

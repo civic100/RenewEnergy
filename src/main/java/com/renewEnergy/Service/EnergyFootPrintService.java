@@ -42,9 +42,9 @@ public class EnergyFootPrintService {
         EnergyFootPrint energyFootPrint = new EnergyFootPrint(energyFootPrintDTO);
         EnergyFootPrint energyFootPrintReal = findEnergyFootPrintsById(id).get();
 
-        energyFootPrintReal.setId_solarpanel(energyFootPrint.getId_solarpanel());
-        energyFootPrintReal.setId_user(energyFootPrint.getId_user());
-        energyFootPrintReal.setId_project(energyFootPrint.getId_project());
+        energyFootPrintReal.setSolarPanel(energyFootPrint.getSolarPanel());
+        energyFootPrintReal.setUser(energyFootPrint.getUser());
+        energyFootPrintReal.setProject(energyFootPrint.getProject());
         energyFootPrintReal.setDate(energyFootPrint.getDate());
         energyFootPrintReal.setCarbonfootprint(energyFootPrint.getCarbonfootprint());
         energyFootPrintReal.setGeneratedenergy(energyFootPrint.getGeneratedenergy());
@@ -61,7 +61,7 @@ public class EnergyFootPrintService {
             energyFootPrint.setIs_disabled(true);
         }
 
-
+        energyFootPrintRepository.save(energyFootPrint);
     }
 
 }

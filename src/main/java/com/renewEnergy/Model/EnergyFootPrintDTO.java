@@ -8,9 +8,9 @@ import lombok.Data;
 public class EnergyFootPrintDTO {
 
     private Integer id_energyfootprint;
-    private Integer id_solarpanel;
-    private Integer id_user;
-    private Integer id_project;
+    private SolarPanels solarPanel;
+    private Users user;
+    private Projects project;
     private LocalDate  date;
     private Integer carbonfootprint;
     private Integer generatedenergy;
@@ -18,9 +18,9 @@ public class EnergyFootPrintDTO {
 
     public EnergyFootPrintDTO(EnergyFootPrint energyFootPrint){
         this.id_energyfootprint = energyFootPrint.getId_energyfootprint();
-        this.id_solarpanel = energyFootPrint.getId_solarpanel();
-        this.id_user = energyFootPrint.getId_user();
-        this.id_project = energyFootPrint.getId_project();
+        this.solarPanel = energyFootPrint.getSolarPanel();
+        this.user = energyFootPrint.getUser();
+        this.project = energyFootPrint.getProject();
         this.date = energyFootPrint.getDate();
         this.carbonfootprint = energyFootPrint.getCarbonfootprint();
         this.generatedenergy = energyFootPrint.getGeneratedenergy();

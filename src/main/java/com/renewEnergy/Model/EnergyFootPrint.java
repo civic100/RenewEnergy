@@ -11,6 +11,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Data
 @RequiredArgsConstructor
@@ -23,14 +25,17 @@ public class EnergyFootPrint {
     @Column(name = "id_energyfootprint")
     private Integer id_energyfootprint;
 
-    @Column(name = "id_solarpanel")
-    private Integer id_solarpanel;
+    @ManyToOne
+    @JoinColumn(name = "id_solarpanel")
+    private SolarPanels solarPanel;
 
-    @Column(name = "id_user")
-    private Integer id_user;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private Users user;
 
-    @Column(name = "id_project")
-    private Integer id_project;
+    @ManyToOne
+    @JoinColumn(name = "id_project")
+    private Projects project;
 
     @Column(name = "date")
     private LocalDate  date;
@@ -46,9 +51,9 @@ public class EnergyFootPrint {
 
     public EnergyFootPrint(EnergyFootPrintDTO energyFootPrintDTO){
         this.id_energyfootprint = energyFootPrintDTO.getId_energyfootprint();
-        this.id_solarpanel = energyFootPrintDTO.getId_solarpanel();
-        this.id_user = energyFootPrintDTO.getId_user();
-        this.id_project = energyFootPrintDTO.getId_project();
+        this.solarPanel = energyFootPrintDTO.getSolarPanel();
+        this.user = energyFootPrintDTO.getUser();
+        this.project =energyFootPrintDTO.getProject();
         this.date = energyFootPrintDTO.getDate();
         this.carbonfootprint = energyFootPrintDTO.getCarbonfootprint();
         this.generatedenergy = energyFootPrintDTO.getGeneratedenergy();
