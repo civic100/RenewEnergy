@@ -22,6 +22,7 @@ public class SolarPanelsDTO {
         this.efficiency = solarPanels.getEfficiency();
         this.celltype = solarPanels.getCelltype();
         this.image_url = solarPanels.getImage_url();
+        this.is_disabled = solarPanels.getIs_disabled();
     }
 
     public SolarPanelsDTO(){

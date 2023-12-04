@@ -1,10 +1,11 @@
 import './App.css'
-import {Routes, Route, Link} from "react-router-dom"
-
+import SolarPanelsComponent from './assets/Components/SolarPanelsComponent';
 function App() {
 
   return (
-    <></>
+    <>
+        <SolarPanelsComponent />
+    </>
   );
 }
 
