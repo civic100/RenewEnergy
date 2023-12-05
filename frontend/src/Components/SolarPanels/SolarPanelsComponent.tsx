@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import '../style/SolarPanelsComponent.css';
+import '../../assets/style/SolarPanelsComponent.css';
 import { styled } from '@mui/material/styles';
 
 
