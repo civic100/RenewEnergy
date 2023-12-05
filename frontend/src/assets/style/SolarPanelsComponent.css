@@ -1,0 +1,22 @@
+button.btn-color{
+    background-color: #f5be0c;
+}
+button.btn-color:hover {
+    background-color: #fbdc24;
+}
+
+button.disabled-btn {
+    background-color: #b46a09;
+}
+
+button.disabled-btn:hover {
+    background-color: #d99406;
+}
+
+button.enabled-btn {
+    background-color: #f5be0c;
+}
+
+button.enabled-btn:hover {
+    background-color: #fbdc24;
+}
