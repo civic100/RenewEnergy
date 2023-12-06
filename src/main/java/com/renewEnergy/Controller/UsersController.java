@@ -48,5 +48,16 @@ public class UsersController {
         usersService.patchUsers(id);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UsersDTO usersDTO) {
+        boolean isAuthenticated = usersService.authenticateUser(usersDTO);
+
+        if (isAuthenticated) {
+            return ResponseEntity.ok("Inicio de sesión exitoso");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+        }
+    }
+
 
 }

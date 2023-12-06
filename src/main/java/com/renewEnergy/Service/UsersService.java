@@ -54,5 +54,11 @@ public class UsersService {
         }
         usersRepository.save(users);
 	}
+
+    //Login User
+    public boolean authenticateUser(UsersDTO usersDTO) {
+        Optional<Users> user = usersRepository.findByEmailAndPassword(usersDTO.getEmail(), usersDTO.getPassword());
+        return user.isPresent();
+    }
     
 }
