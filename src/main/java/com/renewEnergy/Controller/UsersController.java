@@ -48,6 +48,7 @@ public class UsersController {
         usersService.patchUsers(id);
     }
 
+    //Login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UsersDTO usersDTO) {
         boolean isAuthenticated = usersService.authenticateUser(usersDTO);
