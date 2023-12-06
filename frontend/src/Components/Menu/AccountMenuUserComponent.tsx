@@ -10,7 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import Link from '@mui/material/Link';
 
-export default function AccountMenuUser() {
+export default function AccountMenuAdmin() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -22,14 +22,8 @@ export default function AccountMenuUser() {
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                <Link href="/home" underline="none">
-                    <Typography sx={{ minWidth: 100 }}>Home</Typography>
-                </Link>
-                <Link href="/solarpanels"  underline="none">
-                    <Typography sx={{ minWidth: 100 }}>Solar Panel</Typography>
-                </Link>
-                <Link href="/projects"  underline="none">
-                    <Typography sx={{ minWidth: 100 }}>Projects</Typography>
+                <Link href="/login" underline="none">
+                    <Typography sx={{ minWidth: 100 }}>Login</Typography>
                 </Link>
                 <Tooltip title="Account settings">
                     <IconButton

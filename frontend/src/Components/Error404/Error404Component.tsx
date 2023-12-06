@@ -40,8 +40,8 @@ const RobotImage = styled.img`
 `;
 
 const Error404Component = () => {
+    //Redirect to index page
     const handleGoHome = () => {
-        // Redirigir al usuario a la página principal
         window.location.href = '/';
     };
     

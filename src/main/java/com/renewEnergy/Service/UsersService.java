@@ -2,19 +2,18 @@ package com.renewEnergy.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.renewEnergy.DataBase.UsersRepository;
 import com.renewEnergy.Model.Users;
 import com.renewEnergy.Model.UsersDTO;
+
 
 @Service
 public class UsersService {
 
     private final UsersRepository usersRepository;
 
-    public UsersService(UsersRepository usersRepository){
+    public UsersService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
 
@@ -55,4 +54,5 @@ public class UsersService {
         }
         usersRepository.save(users);
 	}
+    
 }

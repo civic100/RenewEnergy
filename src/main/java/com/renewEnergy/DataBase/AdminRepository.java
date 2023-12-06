@@ -3,11 +3,9 @@ package com.renewEnergy.DataBase;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.renewEnergy.Model.Users;
+import com.renewEnergy.Model.Admin;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Integer>{
-
-    Optional<Users> findByEmailAndPassword(String email, String password);
-    
+public interface AdminRepository extends JpaRepository<Admin, Integer>{
+    Optional<Admin> findByPassword(String password);
 }
