@@ -1,9 +1,10 @@
 import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
 
-const BtnEditComponent = ( {variant, color, onClick}) => {
+const BtnEditComponent = ( {onClick}) => {
     return (
-        <Button variant={variant} color={color} onClick={onClick}>
-            Create
+        <Button variant={'contained'} className={'btn-color'} onClick={onClick}>
+            <EditIcon />
         </Button>
     );
 };

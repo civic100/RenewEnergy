@@ -1,8 +1,8 @@
 import Button from '@mui/material/Button';
 
-const BtnCreateComponent = ( {variant, color, onClick}) => {
+const BtnCreateComponent = ( {onClick}) => {
     return (
-        <Button variant={variant} color={color} onClick={onClick}>
+        <Button variant={'contained'} color={'success'} onClick={onClick}>
             Create
         </Button>
     );

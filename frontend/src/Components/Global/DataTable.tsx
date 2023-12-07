@@ -5,11 +5,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import '../../assets/style/SolarPanelsComponent.css';
 import { styled } from '@mui/material/styles';
 import BtnEdit from '../Button/BtnEditComponent';
 import BtnEnabled from '../Button/BtnEnabledComponent';
+import '../../assets/style/SolarPanelsComponent.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -50,25 +49,14 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
                                 <StyledTableCell key={column.key} align={column.align}>{row[column.key]}</StyledTableCell>
                             ))}
                             <StyledTableCell align="right">
-                                <Button
-                                    variant="contained"
-                                    className="btn-color"
-                                    onClick={(e) => onEdit(e, row[idKey])}>
-                                    EDIT
-                                </Button>
+                                <BtnEdit onClick={(e) => onEdit(e, row[idKey])} />
                             </StyledTableCell>
                             <StyledTableCell align="right">
-                                <Button
-                                    variant="contained"
-                                    className={`${row.is_disabled ? 'enabled-btn' : 'disabled-btn'}`}
-                                    onClick={() => onEnable(row[idKey])}>
-                                    {row.is_disabled ? 'ENABLED' : 'DISABLED'}
-                                </Button>
+                                <BtnEnabled classState={row.is_disabled} onClick={() => onEnable(row[idKey])}/>
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
-
             </Table>
         </TableContainer>
 

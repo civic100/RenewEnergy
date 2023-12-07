@@ -137,9 +137,7 @@ const ProjectsComponent = () => {
 
     return (
         <>
-            <BtnCreate variant={'contained'} color={'success'} onClick={handlePOST}/>
-
-
+            <BtnCreate onClick={handlePOST}/>
             <DataTable columns={columns} data={projects} onEnable={handlePATCH} onEdit={handlePUT} idKey='id_project' />
             <DataForm fields={fields} editedType={editedProject.id_project ? 'Edit' : 'Add'} editedData={editedProject} onChange={handleFormChange} onSubmit={handleFormSubmit} onClose={handleClose} anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} />
         </>

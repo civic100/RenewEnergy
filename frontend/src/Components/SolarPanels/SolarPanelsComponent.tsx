@@ -137,7 +137,7 @@ const SolarPanelsComponent = () => {
 
     return (
         <>
-            <BtnCreate variant={'contained'} color={'success'} onClick={handlePOST}/>
+            <BtnCreate onClick={handlePOST}/>
             <DataTable columns={columns} data={solarPanels} onEnable={handlePATCH} onEdit={handlePUT} idKey="id_solarpanel"/>
             <DataForm fields={fields} editedType={editedPanel.id_solarpanel ? 'Edit' : 'Add'} editedData={editedPanel} onChange={handleFormChange} onSubmit={handleFormSubmit} onClose={handleClose} anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} />
         </>
