@@ -1,7 +1,7 @@
 import {Outlet, Link, Navigate} from "react-router-dom";
 
 import React from "react";
-import AccountMenuAdmin from "../Components/Menu/AccountMenuAdminComponent";
+import AccountMenuAdmin from "../Components/Menu/admin/AccountMenuAdminComponent";
 
 const NavBar = () => {
     return (

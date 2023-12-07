@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
 import React from "react";
-import AccountMenuUser from "../Components/Menu/AccountMenuUserComponent";
+import AccountMenuUser from "../Components/Menu/user/AccountMenuUserComponent";
 
 const NavBar = () => {
     return (

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import DataTable from '../Global/DataTable.tsx';
-import DataForm from '../Global/DataForm.tsx';
+import DataTable from '../../Global/DataTable.tsx';
+import DataForm from '../../Global/DataForm.tsx';
 import useProjectsState from './useProjectsState.tsx';
-import BtnCreate from '../Button/BtnCreateComponent.tsx';
+import BtnCreate from '../../Button/BtnCreateComponent.tsx';
 
 const ProjectsComponent = () => {
     const {
