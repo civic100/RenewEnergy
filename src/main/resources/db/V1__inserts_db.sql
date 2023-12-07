@@ -1,17 +1,18 @@
--- Insert users
+
+-- Insertar usuarios
 INSERT INTO users (name, email, password, user_type, image_url, is_disabled)
 VALUES
     ('Normal User', 'user@example.com', 'password123', 'normal', 'image1.jpg', 0),
-    ('Company XYZ', 'company@xyz.com', 'password456', 'company', 'image2.jpg', 0);
+    ('Company 1', 'company@1.com', 'password456', 'company', 'image2.jpg', 0),
+    ('Company 2', 'company@2.com', 'password456', 'company', 'image3.jpg', 0);
 
--- Get the user_id of the user of type 'company'
-SET @companyUserId = (SELECT id_user FROM users WHERE user_type = 'company' LIMIT 1);
 
--- Insert companies and associate them with the user of type 'company'
+-- Insertar empresas y asociarlas con el usuario de tipo 'company'
 INSERT INTO companies (id_user, company_name, website, image_url, is_disabled)
 VALUES
-    (@companyUserId, 'Company A', 'http://company-a.com', 'company_image_a.jpg', 0),
-    (@companyUserId, 'Company B', 'http://company-b.com', 'company_image_b.jpg', 0);
+    (2, 'Company A', 'http://company-a.com', 'company_image_a.jpg', 0),
+    (3, 'Company B', 'http://company-b.com', 'company_image_b.jpg', 0);
+
 
 -- Insert solar panels
 INSERT INTO solarpanels (model, manufacturer, nominalpower, efficiency, celltype, image_url, is_disabled)

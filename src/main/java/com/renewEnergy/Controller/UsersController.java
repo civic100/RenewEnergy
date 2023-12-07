@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.renewEnergy.Model.Companies;
 import com.renewEnergy.Model.Users;
 import com.renewEnergy.Model.UsersDTO;
+import com.renewEnergy.Service.CompaniesService;
 import com.renewEnergy.Service.UsersService;
 
 @RestController
@@ -24,6 +26,8 @@ import com.renewEnergy.Service.UsersService;
 public class UsersController {
     @Autowired
     UsersService usersService;
+    @Autowired
+    CompaniesService companiesService;
 
     @GetMapping()
 	public List<Users> getUsers() {
@@ -48,17 +52,25 @@ public class UsersController {
         usersService.patchUsers(id);
     }
 
-    //Login
+   //Login
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UsersDTO usersDTO) {
-        boolean isAuthenticated = usersService.authenticateUser(usersDTO);
+    public ResponseEntity<?> login(@RequestBody UsersDTO usersDTO) {
+        Users user = usersService.getUserId(usersDTO);
+        boolean isAuthenticated = user.getId_user() != null;
 
         if (isAuthenticated) {
-            return ResponseEntity.ok("Inicio de sesión exitoso");
+            List<Companies> companies = companiesService.findComapniesByUserId(user.getId_user());
+
+            if (!companies.isEmpty()) {
+                return ResponseEntity.ok(companies);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron compañías para el usuario");
+            }
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }
     }
 
 
-}
+
+}   

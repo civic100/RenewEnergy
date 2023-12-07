@@ -56,9 +56,13 @@ public class UsersService {
 	}
 
     //Login User
-    public boolean authenticateUser(UsersDTO usersDTO) {
+    public  Optional<Users> authenticateUser(UsersDTO usersDTO) {
         Optional<Users> user = usersRepository.findByEmailAndPassword(usersDTO.getEmail(), usersDTO.getPassword());
-        return user.isPresent();
+        return user;
     }
-    
+    //Recuperar ID
+    public  Users getUserId(UsersDTO usersDTO){
+        Users user = authenticateUser(usersDTO).get();
+      return user;
+    }
 }

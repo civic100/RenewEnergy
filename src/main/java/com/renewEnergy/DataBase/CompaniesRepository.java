@@ -1,6 +1,7 @@
 package com.renewEnergy.DataBase;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,7 @@ public interface CompaniesRepository extends JpaRepository<Companies,Integer>{
     @Query("SELECT c FROM Companies c WHERE c.is_disabled = true")
     List<Companies> findAllEnableCompanies();
 
+    @Query("SELECT c FROM Companies c WHERE c.user.id_user = :id")
+    List<Companies> findByUserId(Integer id);
     
 }
