@@ -1,5 +1,5 @@
 import React from 'react';
-import SolarPanelsComponent from '../Components/SolarPanels/SolarPanelsComponent';
+import SolarPanelsComponent from '../../Components/admin/SolarPanels/SolarPanelsComponent';
 function SolarPanels() {
 
     return (

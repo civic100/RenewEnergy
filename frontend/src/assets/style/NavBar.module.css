@@ -1,0 +1,62 @@
+
+.container{
+    width: 100vw;
+    height: 10vh;
+    min-height: max-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+
+    justify-content: space-between;
+    font-family: Manrope,sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 0 15px -4px hsla(25,7%,68%,.549);
+    margin-bottom: 10px;
+    
+}
+
+.items{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-right: 2rem;
+}
+
+.item > a:hover{
+    color: rgba(255, 196, 0, 0.878);
+    transition: color .15s
+    color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.items > div > a:link, a:active, a {
+    text-decoration:none;
+    color: black;
+    font-weight: bold;
+
+}
+
+.login{
+    background-color: rgba(255, 196, 0, 0.878);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.logo{
+    width: 20%;
+    height: 100%;
+    padding-left: 7%;
+
+}
+
+.logo > a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;    
+}
+
+.logo > a > img {
+    height: 80%;
+}
