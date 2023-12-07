@@ -8,6 +8,8 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import '../../assets/style/SolarPanelsComponent.css';
 import { styled } from '@mui/material/styles';
+import BtnEdit from '../Button/BtnEditComponent';
+import BtnEnabled from '../Button/BtnEnabledComponent';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -45,7 +47,7 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
                     {data.map((row) => (
                         <StyledTableRow key={row[idKey]}>
                             {columns.map((column) => (
-                            <StyledTableCell key={column.key} align={column.align}>{row[column.key]}</StyledTableCell>
+                                <StyledTableCell key={column.key} align={column.align}>{row[column.key]}</StyledTableCell>
                             ))}
                             <StyledTableCell align="right">
                                 <Button
@@ -66,6 +68,7 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
                         </StyledTableRow>
                     ))}
                 </TableBody>
+
             </Table>
         </TableContainer>
 

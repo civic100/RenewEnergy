@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import '../../assets/style/SolarPanelsComponent.css';
-import DataTable from './DataTable.tsx';
-import DataForm from './DataForm.tsx';
+import DataTable from '../Global/DataTable.tsx';
+import DataForm from '../Global/DataForm.tsx';
 import useSolarPanelState from './SolarPanelsState.tsx';
+import BtnCreate from '../Button/BtnCreateComponent.tsx';
 
 const SolarPanelsComponent = () => {
     const {
@@ -137,11 +137,7 @@ const SolarPanelsComponent = () => {
 
     return (
         <>
-            <Button variant="contained" color="success"
-                onClick={handlePOST}>
-                Create
-            </Button>
-            
+            <BtnCreate variant={'contained'} color={'success'} onClick={handlePOST}/>
             <DataTable columns={columns} data={solarPanels} onEnable={handlePATCH} onEdit={handlePUT} idKey="id_solarpanel"/>
             <DataForm fields={fields} editedType={editedPanel.id_solarpanel ? 'Edit' : 'Add'} editedData={editedPanel} onChange={handleFormChange} onSubmit={handleFormSubmit} onClose={handleClose} anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} />
         </>

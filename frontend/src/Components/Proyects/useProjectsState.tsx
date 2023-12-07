@@ -8,8 +8,8 @@ const useProjectsState = () => {
         id_project: null,
         description: '',
         geographic_area: '',
-        coordinates: null,
-        village_name: null,
+        coordinates: '',
+        village_name: '',
         image_url: '',
     });
 
@@ -18,8 +18,8 @@ const useProjectsState = () => {
             id_project: null,
             description: '',
             geographic_area: '',
-            coordinates: null,
-            village_name: null,
+            coordinates: '',
+            village_name: '',
             image_url: '',
         });
     };
@@ -34,12 +34,12 @@ const useProjectsState = () => {
     ];
 
     const fields = [
-        { key: 'description', label: 'Description', align: 'right' },
-        { key: 'geographic_area', label: 'Geographic Area', align: 'right'},
-        { key: 'coordinates', label: 'Coordinates', align: 'right' },
-        { key: 'village_name', label: 'Village_name', align: 'right' },
+        { name: 'description', label: 'Description', align: 'right' },
+        { name: 'geographic_area', label: 'Geographic Area', align: 'right'},
+        { name: 'coordinates', label: 'Coordinates', align: 'right' },
+        { name: 'village_name', label: 'Village_name', align: 'right' },
         { name: 'image_url', label: 'Image_url', type: 'text' }
-        ];
+    ];
 
     return {
         projects,

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
-import DataTable from '../SolarPanels/DataTable.tsx';
-import DataForm from '../SolarPanels/DataForm.tsx';
+import DataTable from '../Global/DataTable.tsx';
+import DataForm from '../Global/DataForm.tsx';
 import useProjectsState from './useProjectsState.tsx';
+import BtnCreate from '../Button/BtnCreateComponent.tsx';
 
-const ProjectsComponent = () =>{
-    const{
+const ProjectsComponent = () => {
+    const {
         projects,
         setProjects,
         editPopoverAnchorEl,
@@ -17,7 +17,7 @@ const ProjectsComponent = () =>{
         clearEditedProject,
         columns,
         fields
-    }= useProjectsState();
+    } = useProjectsState();
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -52,6 +52,7 @@ const ProjectsComponent = () =>{
                 project.id_project === id ? { ...project, is_disabled: !project.is_disabled } : project
             );
             setProjects(updatedProjects);
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -87,7 +88,7 @@ const ProjectsComponent = () =>{
                     },
                     body: JSON.stringify(editedProject),
                 });
-    
+
                 if (!response.ok) {
                     throw new Error('Error al editar el project');
                 }
@@ -100,24 +101,24 @@ const ProjectsComponent = () =>{
                     },
                     body: JSON.stringify(editedProject),
                 });
-    
+
                 if (!response.ok) {
                     throw new Error('Error al agregar el projects');
                 }
-    
+
                 // Verifica si la respuesta tiene datos antes de intentar analizarla
                 const responseData = await response.text();
                 const newProject = responseData ? JSON.parse(responseData) : null;
-    
+
                 if (newProject) {
                     // Agrega la nueva placa project a la lista
                     setProjects([...projects, newProject]);
                 }
             }
-    
+
             // Actualizar la lista de paneles project después de editar o agregar
             const updatedProjects = projects.map((project) =>
-                project.id_projec === editedProject.id_projec ? editedProject : project
+                project.id_project === editedProject.id_project ? editedProject : project
             );
             setProjects(updatedProjects);
             handleClose();
@@ -133,20 +134,18 @@ const ProjectsComponent = () =>{
         // Abre el Popover para ingresar los detalles de la nueva placa project
         setCreatePopoverAnchorEl(event.currentTarget);
     };
-    
+
     return (
         <>
-            <Button variant="contained" color="success"
-                onClick={handlePOST}>
-                Create
-            </Button>
-            
-            <DataTable columns={columns} data={projects} onEnable={handlePATCH} onEdit={handlePUT} idKey="id_project"/>
+            <BtnCreate variant={'contained'} color={'success'} onClick={handlePOST}/>
+
+
+            <DataTable columns={columns} data={projects} onEnable={handlePATCH} onEdit={handlePUT} idKey='id_project' />
             <DataForm fields={fields} editedType={editedProject.id_project ? 'Edit' : 'Add'} editedData={editedProject} onChange={handleFormChange} onSubmit={handleFormSubmit} onClose={handleClose} anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} />
         </>
     );
 
-    
+
 };
 
 export default ProjectsComponent;
