@@ -52,7 +52,6 @@ const ProjectsComponent = () => {
                 project.id_project === id ? { ...project, is_disabled: !project.is_disabled } : project
             );
             setProjects(updatedProjects);
-
         } catch (error) {
             console.error('Error:', error);
         }
