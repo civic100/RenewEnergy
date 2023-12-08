@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import BtnEdit from '../Button/BtnEditComponent';
 import BtnEnabled from '../Button/BtnEnabledComponent';
-import '../../assets/style/SolarPanelsComponent.css';
+import "../../assets/style/Button.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
