@@ -19,8 +19,7 @@ import com.renewEnergy.Service.SolarPanelsService;
 
 @RestController
 @RequestMapping("/solarpanels")
-@CrossOrigin(origins = "http://localhost:5173")
-
+@CrossOrigin
 public class SolarPanelsController {
     @Autowired
     SolarPanelsService solarPanelsService;

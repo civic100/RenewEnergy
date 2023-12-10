@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("projectsolarpanels")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class ProjectSolarPanelsController {
 
     @Autowired
