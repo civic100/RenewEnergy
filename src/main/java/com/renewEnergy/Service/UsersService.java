@@ -63,6 +63,13 @@ public class UsersService {
     //Recuperar ID
     public  Users getUserId(UsersDTO usersDTO){
         Users user = authenticateUser(usersDTO).get();
-      return user;
+        return user;
     }
+
+    public Optional<Users> authenticateEmail(UsersDTO usersDTO) {
+        Optional<Users> user = usersRepository.findByEmail(usersDTO.getEmail());
+        return user;
+    }
+
+
 }

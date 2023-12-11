@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.renewEnergy.Model.Companies;
 import com.renewEnergy.Model.Users;
@@ -25,7 +23,7 @@ import com.renewEnergy.Model.UsersDTO;
 import com.renewEnergy.Service.CompaniesService;
 import com.renewEnergy.Service.EnergyFootPrintService;
 import com.renewEnergy.Service.UsersService;
-
+import com.renewEnergy.DataBase.UsersRepository;
 @RestController
 @RequestMapping("/users")
 public class UsersController {
@@ -36,8 +34,6 @@ public class UsersController {
     @Autowired
     EnergyFootPrintService energyFootPrintService;
 
-    @Value("${upload-dir}")
-    private String uploadDir;
 
     @GetMapping()
 	public List<Users> getUsers() {
@@ -49,9 +45,18 @@ public class UsersController {
 		return usersService.findUsersById(id);
 	}
     @PostMapping()
-    public void addUsers(@RequestBody UsersDTO usersDTO){
-        usersService.addUsers(usersDTO);
+    public ResponseEntity<String> addUsers(@RequestBody UsersDTO usersDTO) {
+        try {
+            if (usersService.authenticateEmail(usersDTO).isPresent()) {
+                throw new RuntimeException("El correo electrónico ya existe");
+            }
+            usersService.addUsers(usersDTO);
+            return ResponseEntity.ok("Usuario creado correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el usuario: " + e.getMessage());
+        }
     }
+    
 	@PutMapping("{id}")
 	public void putUsers(@RequestBody UsersDTO usersDTO,@PathVariable Integer id){
         usersService.putUsers(usersDTO, id);
