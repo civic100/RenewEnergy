@@ -1,6 +1,5 @@
 package com.renewEnergy.Controller;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,7 +22,6 @@ import com.renewEnergy.Model.UsersDTO;
 import com.renewEnergy.Service.CompaniesService;
 import com.renewEnergy.Service.EnergyFootPrintService;
 import com.renewEnergy.Service.UsersService;
-import com.renewEnergy.DataBase.UsersRepository;
 @RestController
 @RequestMapping("/users")
 public class UsersController {
