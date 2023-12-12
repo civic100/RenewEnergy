@@ -8,7 +8,6 @@ const NavBar = () => {
             <nav>
                 <AccountMenuUser/>
             </nav>
-            <hr />
             <Outlet />
         </div>
     );

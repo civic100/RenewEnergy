@@ -22,13 +22,13 @@ export default function AccountMenuAdmin() {
         setAnchorEl(null);
     };
     return (
-        <div className='container'>
+        <div className={navBarStyle.node}>
           <div className={navBarStyle.container}>
     
             <div className={navBarStyle.logo}>
-              <a href="/home">
+              <Link to='/home'>
                 <img src={imgLogo} alt="" />
-              </a>
+              </Link>
             </div>
     
             <div className={navBarStyle.items}>

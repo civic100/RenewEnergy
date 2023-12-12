@@ -14,13 +14,13 @@ import imgLogo from "../../../assets/images/logo.png"
 
 export default function AccountMenuAdmin(){
     return (
-        <div className='container'>
+        <div className={navBarStyle.node}>
           <div className={navBarStyle.container}>
     
             <div className={navBarStyle.logo}>
-              <a href="/home">
+              <Link to='/home'>
                 <img src={imgLogo} alt="" />
-              </a>
+              </Link>
             </div>
     
             <div className={navBarStyle.items}>

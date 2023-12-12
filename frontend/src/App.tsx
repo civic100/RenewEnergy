@@ -7,7 +7,7 @@ import NavBarUser from './page/NavBarUser';
 
 const App: React.FC = () => {
 
-  const [isAdmin,   setIsAdmin] = useState<boolean>(true);
+  const [isAdmin,   setIsAdmin] = useState<boolean>(false);
 
   if (isAdmin) {
     console.log("SOY ADMIN");

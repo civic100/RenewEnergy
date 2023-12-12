@@ -10,7 +10,6 @@ const NavBar = () => {
             <nav>
                 <AccountMenuAdmin/>
             </nav>
-            <hr />
             <Outlet />
         </div>
     );
