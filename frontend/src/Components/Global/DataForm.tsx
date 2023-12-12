@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import "../../assets/style/Button.css";
 
 const DataForm = ({ fields, editedType, editedData, onChange, onSubmit, onClose, anchorEl }) => {
     return (
