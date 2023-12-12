@@ -1,29 +1,32 @@
-// Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setIsAdmin }) => {
-    const [id_admin, setId_Admin] = useState('');
+interface LoginComponentProps {
+    setIsUser: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login: React.FC<LoginComponentProps> = ({ setIsUser }) => {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8080/admin/login', {
+            const response = await fetch('http://localhost:8080/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id_admin,
+                    email,
                     password,
                 }),
             });
 
             if (response.ok) {
                 // Inicio de sesión exitoso
-                setIsAdmin(true); // Establecer el estado de administrador
-                history('/home'); // Redirige a la página principal después del inicio de sesión
+                setIsUser(true); // Establecer el estado de usuario normal
+                navigate('/home'); // Redirige a la página principal después del inicio de sesión
             } else {
                 console.error('Credenciales inválidas');
             }
@@ -34,16 +37,24 @@ const Login = ({ setIsAdmin }) => {
 
     return (
         <div>
-            <h2>Login</h2>
+            <h2>Login User</h2>
             <form>
                 <label>
-                    id:
-                    <input type="text" value={id_admin} onChange={(e) => setId_Admin(e.target.value)} />
+                    email:
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                 </label>
                 <br />
                 <label>
                     Password:
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                 </label>
                 <br />
                 <button type="button" onClick={handleLogin}>

@@ -19,7 +19,7 @@ import com.renewEnergy.Service.ContributionPlansService;
 
 @RestController
 @RequestMapping("/payment")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class ContributionPlansController {
     @Autowired
     ContributionPlansService contributionPlansService;

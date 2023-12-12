@@ -1,6 +1,7 @@
 package com.renewEnergy.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.renewEnergy.DataBase.EnergyFootPrintRepository;
@@ -62,6 +63,10 @@ public class EnergyFootPrintService {
         }
 
         energyFootPrintRepository.save(energyFootPrint);
+    }
+
+    public Map<String, Double> getAverageFootprintAndEnergyForUser(Integer userId) {
+        return energyFootPrintRepository.getAverageFootprintAndEnergy(userId);
     }
 
 }

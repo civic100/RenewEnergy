@@ -19,7 +19,7 @@ import com.renewEnergy.Service.CompaniesService;
 
 @RestController
 @RequestMapping("/companies")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class CompaniesController {
     @Autowired
     CompaniesService companiesService;

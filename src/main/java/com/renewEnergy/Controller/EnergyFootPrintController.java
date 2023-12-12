@@ -20,7 +20,7 @@ import com.renewEnergy.Service.EnergyFootPrintService;
 
 @RestController
 @RequestMapping("/energyfootprint")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class EnergyFootPrintController {
     @Autowired
     EnergyFootPrintService energyFootPrintService;
