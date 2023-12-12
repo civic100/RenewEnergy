@@ -1,0 +1,16 @@
+.zone{
+    border: 2px dashed #cccccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.imageStyles{
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 20px;
+}

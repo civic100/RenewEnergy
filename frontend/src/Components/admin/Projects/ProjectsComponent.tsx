@@ -18,6 +18,7 @@ const ProjectsComponent = () => {
         columns,
         fields
     } = useProjectsState();
+    const [updated, setUpdated] = useState(false);
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -29,13 +30,16 @@ const ProjectsComponent = () => {
 
                 const data = await response.json();
                 setProjects(data);
+                setUpdated(true);
             } catch (error) {
                 console.error('Error:', error);
             }
         };
 
-        fetchProjects();
-    }, []);
+        if(!updated){
+            fetchProjects();
+        }
+    }, [projects]);
 
     const handlePATCH = async (id) => {
         try {
@@ -120,6 +124,7 @@ const ProjectsComponent = () => {
                 project.id_project === editedProject.id_project ? editedProject : project
             );
             setProjects(updatedProjects);
+            setUpdated(false);
             handleClose();
         } catch (error) {
             console.error('Error:', error);
