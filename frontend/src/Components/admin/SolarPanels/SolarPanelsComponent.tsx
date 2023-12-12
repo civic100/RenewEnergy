@@ -19,7 +19,8 @@ const SolarPanelsComponent = () => {
         columns,
         fields
     } = useSolarPanelState();
-
+    const [updated, setUpdated] = useState(false);
+    
     useEffect(() => {
         const fetchSolarPanels = async () => {
             try {
@@ -30,12 +31,16 @@ const SolarPanelsComponent = () => {
 
                 const data = await response.json();
                 setSolarPanels(data);
+                setUpdated(true); // Marcar que la actualización se ha realizado
+
             } catch (error) {
                 console.error('Error:', error);
             }
         };
 
-        fetchSolarPanels();
+        if (!updated) {
+            fetchSolarPanels(); // Realizar la llamada solo si no se ha actualizado
+        }
     }, [solarPanels]);
 
     const handlePATCH = async (id) => {
@@ -121,6 +126,7 @@ const SolarPanelsComponent = () => {
                 panel.id_solarpanel === editedPanel.id_solarpanel ? editedPanel : panel
             );
             setSolarPanels(updatedSolarPanels);
+            setUpdated(false);
             handleClose();
         } catch (error) {
             console.error('Error:', error);

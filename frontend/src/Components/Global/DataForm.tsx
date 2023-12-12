@@ -33,8 +33,6 @@ const DataForm = ({ fields, editedType, editedData, onChange, onSubmit, onClose,
             const formData = new FormData();
             formData.append('image', selectedImage);
 
-            // Crear una solicitud AJAX para enviar el formulario con la imagen al servidor
-            // (puedes usar axios u otro método para realizar la solicitud)
             axios.post('http://localhost:8080/images', formData)
                 .then(response => {
                     console.log('Imagen guardada con éxito:', response.data);

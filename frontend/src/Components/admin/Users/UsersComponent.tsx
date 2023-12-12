@@ -20,6 +20,7 @@ const UsersComponent = () => {
         columns,
         fields
     } = useUsersState();
+    const [updated, setUpdated] = useState(false);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -31,12 +32,15 @@ const UsersComponent = () => {
 
                 const data = await response.json();
                 setUsers(data);
+                setUpdated(true);
             } catch (error) {
                 console.error('Error:', error);
             }
         };
 
-        fetchUsers();
+        if(!updated){
+            fetchUsers();
+        }
     }, [users]);
 
     const handlePATCH = async (id) => {
@@ -122,6 +126,7 @@ const UsersComponent = () => {
                 user.id_users === editedUsers.id_users ? editedUsers : user
             );
             setUsers(updatedUsers);
+            setUpdated(false);
             handleClose();
         } catch (error) {
             console.error('Error:', error);
