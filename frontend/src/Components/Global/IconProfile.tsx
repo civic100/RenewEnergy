@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import Menu from '@mui/material/Menu';
+import NavBarDel from "../../page/NavBarDel";
 
 export default function IconProfile() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

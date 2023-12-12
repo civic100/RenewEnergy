@@ -69,4 +69,12 @@ public class EnergyFootPrintService {
         return energyFootPrintRepository.getAverageFootprintAndEnergy(userId);
     }
 
+    public Map<String,Double> getSumEnergyUser(Integer userId) {
+        return energyFootPrintRepository.getSumEnergy(userId);
+    }
+
+    public List<EnergyFootPrint> getAllEnergyFootprintsForUser(Integer userId) {
+        return energyFootPrintRepository.findAllByUserId(userId);
+    }
+     
 }

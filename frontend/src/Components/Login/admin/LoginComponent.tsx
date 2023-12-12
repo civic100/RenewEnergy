@@ -1,68 +1,67 @@
+// LoginComponent.tsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface LoginComponentProps {
-    setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Login: React.FC<LoginComponentProps> = ({ setIsAdmin }) => {
-    const [id_admin, setId_Admin] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+const Login: React.FC<LoginComponentProps> = ({ setIsLoggedIn }) => {
+  const [id_admin, setId_Admin] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleLogin = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/admin/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id_admin,
-                    password,
-                }),
-            });
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-            if (response.ok) {
-                // Inicio de sesión exitoso
-                setIsAdmin(true); // Establecer el estado de administrador
-                navigate('/home'); // Redirige a la página principal después del inicio de sesión
-            } else {
-                console.error('Credenciales inválidas');
-            }
-        } catch (error) {
-            console.error('Error al iniciar sesión', error);
-        }
-    };
+    try {
+      const response = await fetch('http://localhost:8080/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id_admin,
+          password,
+        }),
+      });
 
-    return (
-        <div>
-            <h2>Login admin</h2>
-            <form>
-                <label>
-                    id:
-                    <input
-                        type="text"
-                        value={id_admin}
-                        onChange={(e) => setId_Admin(e.target.value)}
-                    />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </label>
-                <br />
-                <button type="button" onClick={handleLogin}>
-                    Login
-                </button>
-            </form>
-        </div>
-    );
+      if (response.ok) {
+        localStorage.setItem('isLoggedIn', 'true');
+        setIsLoggedIn(true);
+        // Redirigir a la página principal después del inicio de sesión si es necesario
+      } else {
+        console.error('Credenciales inválidas');
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión', error);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Login admin</h2>
+      <form onSubmit={handleLogin}>
+        <label>
+          id:
+          <input
+            type="text"
+            value={id_admin}
+            onChange={(e) => setId_Admin(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <br />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
 };
 
 export default Login;
