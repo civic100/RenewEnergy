@@ -35,7 +35,7 @@ const ProjectsComponent = () => {
         };
 
         fetchProjects();
-    }, [projects]);
+    }, []);
 
     const handlePATCH = async (id) => {
         try {

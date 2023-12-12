@@ -6,33 +6,35 @@ import imgLogo from '../../../assets/images/logo.png';
 
 
 export default function AccountMenuAdmin() {
+  
+
   return (
     <div className="container">
       <div className={navBarStyle.container}>
         <div className={navBarStyle.logo}>
-          <a href="/home">
+          <a href="/">
             <img src={imgLogo} alt="" />
           </a>
         </div>
 
         <div className={navBarStyle.items}>
           <div className={navBarStyle.item}>
-            <NavLink to="/users" activeClassName="active">
+            <NavLink to="/admin/users" >
               USUARIOS
             </NavLink>
           </div>
           <div className={navBarStyle.item}>
-            <NavLink to="/projects" activeClassName="active">
+            <NavLink to="/admin/projects">
               PROYECTOS
             </NavLink>
           </div>
           <div className={navBarStyle.item}>
-            <NavLink to="/solarpanels" activeClassName="active">
+            <NavLink to="/admin/solarpanels" >
               PANELES
             </NavLink>
           </div>
           <div className={navBarStyle.item}>
-            <NavLink to="/contribution" activeClassName="active">
+            <NavLink to="/admin/contribution">
               CONTRIBUCIÓN
             </NavLink>
           </div>
@@ -43,4 +45,7 @@ export default function AccountMenuAdmin() {
       </div>
     </div>
   );
+
 }
+
+

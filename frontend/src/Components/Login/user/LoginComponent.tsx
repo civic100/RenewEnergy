@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// UserLogin.tsx
 
-interface LoginComponentProps {
-    setIsUser: React.Dispatch<React.SetStateAction<boolean>>;
+import React, { useState } from 'react';
+
+interface UserLoginProps {
+    onLogin: (userType: string) => void;
 }
 
-const Login: React.FC<LoginComponentProps> = ({ setIsUser }) => {
+const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+    const [userType, setUserType] = useState('user'); // Valor predeterminado para usuario normal
 
     const handleLogin = async () => {
         try {
@@ -17,52 +18,39 @@ const Login: React.FC<LoginComponentProps> = ({ setIsUser }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    email,
-                    password,
-                }),
+                body: JSON.stringify({ email, password }),
             });
 
             if (response.ok) {
-                // Inicio de sesión exitoso
-                setIsUser(true); // Establecer el estado de usuario normal
-                navigate('/home'); // Redirige a la página principal después del inicio de sesión
+                // Lógica de manejo de sesión
+                onLogin(userType);
             } else {
-                console.error('Credenciales inválidas');
+                // Lógica de manejo de error
+                console.error('Error en el inicio de sesión del usuario');
             }
         } catch (error) {
-            console.error('Error al iniciar sesión', error);
+            console.error('Error en la solicitud:', error);
         }
     };
 
     return (
         <div>
-            <h2>Login User</h2>
+            <h2>Inicio de sesión de usuario</h2>
             <form>
                 <label>
-                    email:
-                    <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+                    Usuario:
+                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
                 <br />
                 <label>
-                    Password:
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    Contraseña:
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
                 <br />
-                <button type="button" onClick={handleLogin}>
-                    Login
-                </button>
+                <button type="button" onClick={handleLogin}>Iniciar sesión</button>
             </form>
         </div>
     );
-};
+}
 
-export default Login;
+export default UserLogin;

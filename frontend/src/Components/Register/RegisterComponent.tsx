@@ -24,7 +24,7 @@ const Register = () => {
             if (response.ok) {
                 // Inicio de sesión exitoso
                 //setIsAdmin(true); // Establecer el estado de administrador
-                history('/home'); // Redirige a la página principal después del inicio de sesión
+                history('/'); // Redirige a la página principal después del inicio de sesión
             } else {
                 console.error('Credenciales inválidas');
             }

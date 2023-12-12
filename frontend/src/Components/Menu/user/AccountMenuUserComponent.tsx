@@ -18,7 +18,7 @@ export default function AccountMenuAdmin() {
           <div className={navBarStyle.container}>
     
             <div className={navBarStyle.logo}>
-              <Link to='/home'>
+              <Link to='/'>
                 <img src={imgLogo} alt="" />
               </Link>
             </div>

@@ -1,67 +1,56 @@
-// LoginComponent.tsx
+// AdminLogin.tsx
+
 import React, { useState } from 'react';
 
-interface LoginComponentProps {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+interface AdminLoginProps {
+  onLogin: (userType: string) => void;
 }
 
-const Login: React.FC<LoginComponentProps> = ({ setIsLoggedIn }) => {
-  const [id_admin, setId_Admin] = useState('');
+const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
+  const [id_user, setId_user] = useState('');
   const [password, setPassword] = useState('');
+  const [userType, setUserType] = useState('admin'); // Valor predeterminado para usuario normal
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleLogin = async () => {
     try {
       const response = await fetch('http://localhost:8080/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          id_admin,
-          password,
-        }),
+        body: JSON.stringify({ id_user, password }),
       });
 
       if (response.ok) {
-        localStorage.setItem('isLoggedIn', 'true');
-        setIsLoggedIn(true);
-        // Redirigir a la página principal después del inicio de sesión si es necesario
+        // Lógica de manejo de sesión
+        onLogin(userType);
       } else {
-        console.error('Credenciales inválidas');
+        // Lógica de manejo de error
+        console.error('Error en el inicio de sesión del administrador');
       }
     } catch (error) {
-      console.error('Error al iniciar sesión', error);
+      console.error('Error en la solicitud:', error);
     }
   };
 
   return (
     <div>
-      <h2>Login admin</h2>
-      <form onSubmit={handleLogin}>
+      <h2>Inicio de sesión de administrador</h2>
+      <form>
         <label>
-          id:
-          <input
-            type="text"
-            value={id_admin}
-            onChange={(e) => setId_Admin(e.target.value)}
-          />
+          Usuario:
+          <input type="text" value={id_user} onChange={(e) => setId_user(e.target.value)} />
         </label>
         <br />
         <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          Contraseña:
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
         <br />
-        <button type="submit">Login</button>
+        <button type="button" onClick={handleLogin}>Iniciar sesión</button>
       </form>
     </div>
   );
-};
+}
 
-export default Login;
+export default AdminLogin;
