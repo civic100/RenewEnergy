@@ -13,5 +13,7 @@ public interface CompaniesRepository extends JpaRepository<Companies,Integer>{
     @Query("SELECT c FROM Companies c WHERE c.is_disabled = true")
     List<Companies> findAllEnableCompanies();
 
+    @Query("SELECT c FROM Companies c WHERE c.user.id_user = :id")
+    List<Companies> findByUserId(Integer id);
     
 }

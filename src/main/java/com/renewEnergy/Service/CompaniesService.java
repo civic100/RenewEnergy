@@ -58,5 +58,9 @@ public class CompaniesService {
         }
         companiesRepository.save(companies);
     }
+
+ public List<Companies> findComapniesByUserId(Integer id) {
+    return companiesRepository.findByUserId(id);
+}
     
 }

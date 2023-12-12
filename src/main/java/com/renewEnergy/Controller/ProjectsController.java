@@ -18,7 +18,7 @@ import com.renewEnergy.Model.ProjectsDTO;
 
 @RestController
 @RequestMapping("/projects")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class ProjectsController {
     @Autowired
 	ProjectsService projectsService;

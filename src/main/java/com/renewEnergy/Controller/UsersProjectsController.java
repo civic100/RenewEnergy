@@ -17,7 +17,7 @@ import com.renewEnergy.Service.UsersProjectsService;
 
 @RestController
 @RequestMapping("/usersprojects")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class UsersProjectsController {
     
     @Autowired
