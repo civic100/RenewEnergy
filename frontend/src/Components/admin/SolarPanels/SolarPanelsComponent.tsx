@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useEffect } from 'react';
-
 import DataTable from '../../Global/DataTable.tsx';
 import DataForm from '../../Global/DataForm.tsx';
 import useSolarPanelState from './SolarPanelsState.tsx';
