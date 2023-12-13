@@ -20,22 +20,22 @@ export default function AccountMenuAdmin() {
         <div className={navBarStyle.items}>
           <div className={navBarStyle.item}>
             <NavLink to="/admin/users" >
-              USUARIOS
+              Usuarios
             </NavLink>
           </div>
           <div className={navBarStyle.item}>
             <NavLink to="/admin/projects">
-              PROYECTOS
+              Proyectos
             </NavLink>
           </div>
           <div className={navBarStyle.item}>
             <NavLink to="/admin/solarpanels" >
-              PANELES
+              Paneles Solares
             </NavLink>
           </div>
           <div className={navBarStyle.item}>
             <NavLink to="/admin/contribution">
-              CONTRIBUCIÓN
+              Contribución
             </NavLink>
           </div>
           <div className="item">

@@ -1,6 +1,7 @@
+// App.tsx
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
-import './App.css';  // Importa tu archivo de estilos aquí
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import './App.css';
 
 import Projects from './page/user/Projects';
 import Contributions from './page/user/Contribution';
@@ -8,60 +9,60 @@ import AdminUsers from './page/admin/Users';
 import AdminContribution from './page/admin/Contribution';
 import AdminProjects from './page/admin/Projects';
 import AdminSolarPanels from './page/admin/SolarPanels';
-import Login from './Components/Login/user/LoginComponent';
-import Register from './Components/Register/RegisterComponent';
 import Home from './page/Home';
 import NavBar from './page/NavBar';
+import UserLogin from './Components/Login/user/LoginComponent';
+import RegisterComponent from './Components/Register/RegisterComponent';
 import AdminLogin from './Components/Login/admin/LoginComponent';
 
-
-
 const App: React.FC = () => {
-  // Estado para controlar si el usuario está autenticado
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Función para manejar el inicio de sesión
   const handleLogin = (userType: string) => {
     setIsAuthenticated(true);
     setIsAdmin(userType === 'admin');
   };
 
-  // Función para manejar el cierre de sesión
   const handleLogout = () => {
-    // Lógica de cierre de sesión...
     setIsAuthenticated(false);
     setIsAdmin(false);
   };
 
+  const handleRegister = () => {
+    setIsAuthenticated(true);
+  };
+  console.log(isAuthenticated);
   return (
-
       <div className="app-container">
-        <NavBar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+        <NavBar isAuthenticated={isAuthenticated}  isAdmin={isAdmin} onLogout={handleLogout}  />
 
-        {/* Definir rutas protegidas y sus componentes */}
         <Routes>
-        <Route path="/" element={<Home />} />
-          <Route path="/projects" Component={Projects} />
-          <Route path="/contributions" Component={Contributions} />
-          {/* Otras rutas de usuario normal... */}
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contributions" element={<Contributions />} />
+
+          {/* Rutas de administrador */}
           {isAdmin && (
             <>
-              <Route path="/admin/users" Component={AdminUsers} />
-              <Route path="/admin/contribution" Component={AdminContribution} />
-              <Route path="/admin/projects" Component={AdminProjects} />
-              <Route path="/admin/solarpanels" Component={AdminSolarPanels} />
-              {/* Otras rutas de administrador... */}
+              <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/contribution" element={<AdminContribution />} />
+              <Route path="/admin/projects" element={<AdminProjects />} />
+              <Route path="/admin/solarpanels" element={<AdminSolarPanels />} />
             </>
           )}
+  
           {/* Rutas de inicio de sesión y registro */}
-          <Route path="/login"  element={isAuthenticated ? <Navigate to="/" /> : <Login onLogin={handleLogin} />} />
-          <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
-          <Route path="/register" element={isAuthenticated ? <Navigate to="/" /> : <Register />}  />
+          {!isAuthenticated && (
+            <>
+              <Route path="/login" element={<UserLogin onLogin={handleLogin} />} />
+              <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
+              <Route path="/register" element={<RegisterComponent onRegister={handleRegister} />} />
+            </>
+          )}
         </Routes>
       </div>
-
   );
-}
+};
 
 export default App;
