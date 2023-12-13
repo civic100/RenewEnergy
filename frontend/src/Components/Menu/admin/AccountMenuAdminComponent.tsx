@@ -1,61 +1,51 @@
-import React from "react";
-import {Routes, Route, Link} from "react-router-dom";
+// AccountMenuAdmin.jsx
+import { NavLink } from 'react-router-dom';
 import navBarStyle from '../../../assets/style/NavBar.module.css';
+import IconProfile from '../../Global/IconProfile';
+import imgLogo from '../../../assets/images/logo.png';
 
-import Projects from "../../../page/admin/Projects";
-import SolarPanels from "../../../page/admin/SolarPanels";
-import Home from "../../../page/Home";
-import Error404 from "../../../page/Error404";
-import Users from "../../../page/admin/Users";
-import Contribution from "../../../page/admin/Contribution";
 
-import IconProfile from "../../Global/IconProfile";
-import imgLogo from "../../../assets/images/logo.png"
+export default function AccountMenuAdmin() {
+  
 
-export default function AccountMenuAdmin(){
-    return (
-        <div className='container'>
-          <div className={navBarStyle.container}>
-    
-            <div className={navBarStyle.logo}>
-              <a href="/home">
-                <img src={imgLogo} alt="" />
-              </a>
-            </div>
-    
-            <div className={navBarStyle.items}>
-              
-              <div className={navBarStyle.item}>
-                <Link to='/users'>USUARIOS</Link>
-              </div>
-              <div className={navBarStyle.item}>
-                <Link to='/projects'>PROYECTOS</Link>
-              </div>
-              <div className={navBarStyle.item}>
-                <Link to='/solarpanels'>PANELES</Link>
-              </div>
-              <div className={navBarStyle.item}>
-                <Link to='/contribution'>CONTRIBUCIÓN</Link>
-              </div>
-              <div className='item'>
-                <IconProfile />
-              </div>
-    
-            </div>
-    
-          </div>
-
-          
-          <Routes>
-            <Route path="/">
-            <Route path='/home' element={<Home />} />
-            <Route path='/projects' element={<Projects />} />
-            <Route path='/users' element={<Users />} />
-            <Route path='/solarpanels' element={<SolarPanels />} />
-            <Route path='/contribution' element={<Contribution />} />
-            </Route>
-            <Route path="*" element={<Error404 />} />
-          </Routes>
+  return (
+    <div className="container">
+      <div className={navBarStyle.container}>
+        <div className={navBarStyle.logo}>
+          <a href="/">
+            <img src={imgLogo} alt="" />
+          </a>
         </div>
-      )
+
+        <div className={navBarStyle.items}>
+          <div className={navBarStyle.item}>
+            <NavLink to="/admin/users" >
+              USUARIOS
+            </NavLink>
+          </div>
+          <div className={navBarStyle.item}>
+            <NavLink to="/admin/projects">
+              PROYECTOS
+            </NavLink>
+          </div>
+          <div className={navBarStyle.item}>
+            <NavLink to="/admin/solarpanels" >
+              PANELES
+            </NavLink>
+          </div>
+          <div className={navBarStyle.item}>
+            <NavLink to="/admin/contribution">
+              CONTRIBUCIÓN
+            </NavLink>
+          </div>
+          <div className="item">
+            <IconProfile />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
 }
+
+

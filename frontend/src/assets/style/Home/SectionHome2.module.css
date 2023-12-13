@@ -1,0 +1,70 @@
+.objetiveSection{
+    width: 100%;
+    max-width: 1320px;
+    margin: auto;
+    height: 70vh;
+    
+}
+
+.objetiveSection > .title{
+    width: 100%;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    text-decoration: underline 3px black;
+    text-underline-offset: 0.2em;
+    font-size: xx-large;
+    font-weight: bold;
+    color: inherit;
+}
+
+.objetiveSection > .content{
+    width: 60%;
+    height: 40%;
+    margin: auto;
+    text-align: center;
+    
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content > .description {
+    font-size: larger;
+    width: 100%;
+    font-weight: 500;
+    color: #425466;
+}
+
+.content > .sections{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 3rem;
+}
+
+.sections > section {
+    width: 30%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 80%;
+}
+
+.info > p {
+    margin-bottom: 0.5rem;
+}
+
+.info > div{
+    font-weight: bold;
+}
+
+.yearSection > .icon {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}

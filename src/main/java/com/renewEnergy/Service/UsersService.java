@@ -1,6 +1,7 @@
 package com.renewEnergy.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.renewEnergy.DataBase.UsersRepository;
@@ -61,10 +62,21 @@ public class UsersService {
         return user;
     }
     //Recuperar ID
-    public  Users getUserId(UsersDTO usersDTO){
-        Users user = authenticateUser(usersDTO).get();
-        return user;
+    public Users getUserId(UsersDTO usersDTO) {
+        Optional<Users> user = authenticateUser(usersDTO);
+
+        // Log de depuración
+        System.out.println("User Optional: " + user);
+
+        // Verifica si el Optional tiene un valor presente
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            // Maneja el caso en el que el usuario no se encuentra
+            throw new NoSuchElementException("El usuario no se encuentra");
+        }
     }
+
 
     public Optional<Users> authenticateEmail(UsersDTO usersDTO) {
         Optional<Users> user = usersRepository.findByEmail(usersDTO.getEmail());

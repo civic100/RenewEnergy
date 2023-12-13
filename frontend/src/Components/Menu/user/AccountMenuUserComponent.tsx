@@ -1,14 +1,6 @@
 import React from "react";
 import {Routes, Route, Link} from "react-router-dom";
 import navBarStyle from "../../../assets/style/NavBar.module.css";
-
-import Home from "../../../page/Home";
-import Projects from "../../../page/user/Projects";
-import Contribution from "../../../page/user/Contribution";
-import Register from "../../Register/RegisterComponent";
-import Login from "../../Login/user/LoginComponent";
-import Error404 from "../../../page/Error404";
-
 import IconProfile from "../../Global/IconProfile";
 import imgLogo from "../../../assets/images/logo.png"
 
@@ -22,13 +14,13 @@ export default function AccountMenuAdmin() {
         setAnchorEl(null);
     };
     return (
-        <div className='container'>
+        <div className={navBarStyle.node}>
           <div className={navBarStyle.container}>
     
             <div className={navBarStyle.logo}>
-              <a href="/home">
+              <Link to='/'>
                 <img src={imgLogo} alt="" />
-              </a>
+              </Link>
             </div>
     
             <div className={navBarStyle.items}>
@@ -50,29 +42,8 @@ export default function AccountMenuAdmin() {
               <div className='item'>
                 <IconProfile />
               </div>
-    
             </div>
-    
           </div>
-      {/*
-          <Routes>
-            <Route path='/home' element={<Home />} />
-            <Route path='/projects' element={<Projects />} />
-            <Route path='/contribute' element={<Projects />} />
-            <Route path='/register' element={<Projects />} />
-            <Route path='/login' element={<Projects />} />
-    </Routes> */}
-
-          <Routes>
-            <Route path="/">
-            <Route path='/home' element={<Home />} />
-            <Route path='/projects' element={<Projects />} />
-            <Route path='/contribute' element={<Contribution />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login setIsAdmin={true} />} />
-            </Route>
-            <Route path="*" element={<Error404 />} />
-          </Routes>
         </div>
     );
 }

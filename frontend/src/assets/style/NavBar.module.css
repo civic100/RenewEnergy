@@ -1,5 +1,9 @@
 
+.node{
+    overflow: hidden;
+}
 .container{
+    
     width: 100vw;
     height: 10vh;
     min-height: max-content;
@@ -10,10 +14,14 @@
     justify-content: space-between;
     font-family: Manrope,sans-serif;
     font-size: 0.75rem;
-    font-weight: 600;
     box-shadow: 0 0 15px -4px hsla(25,7%,68%,.549);
-    margin-bottom: 10px;
-    
+    left: 0;
+    margin-bottom: 0;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
 }
 
 .items{
@@ -40,7 +48,7 @@
 .login{
     background-color: rgba(255, 196, 0, 0.878);
     padding: 0.5rem;
-    border-radius: 5px;
+    border-radius: 0.25rem;
 }
 
 .logo{
@@ -60,3 +68,4 @@
 .logo > a > img {
     height: 80%;
 }
+

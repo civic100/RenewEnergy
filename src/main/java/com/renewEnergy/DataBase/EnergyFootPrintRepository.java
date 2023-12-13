@@ -20,4 +20,12 @@ public interface EnergyFootPrintRepository extends JpaRepository<EnergyFootPrint
      "FROM EnergyFootPrint e WHERE e.user.id_user = :userId")
      Map<String, Double> getAverageFootprintAndEnergy(@Param("userId") Integer userId);
 
+     @Query("SELECT SUM(e.carbonfootprint) as sumCarbonFootprint, SUM(e.generatedenergy) as sumGeneratedEnergy " +
+     "FROM EnergyFootPrint e WHERE e.user.id_user = :userId")
+     Map<String, Double>  getSumEnergy (@Param("userId") Integer userId);
+
+     @Query("SELECT e FROM EnergyFootPrint e WHERE e.user.id_user = :userId")
+     List<EnergyFootPrint> findAllByUserId(Integer userId);
+     
+
 }
