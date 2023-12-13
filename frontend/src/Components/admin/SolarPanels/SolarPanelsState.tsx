@@ -11,10 +11,8 @@ const useSolarPanelState = () => {
         nominalpower: null,
         efficiency: null,
         celltype: '',
-        image_url: '',
+        image_url: ''
     });
-
-    const [reloadData, setReloadData] = useState(false);
 
     const clearEditedPanel = () => {
         setEditedPanel({
@@ -24,7 +22,7 @@ const useSolarPanelState = () => {
             nominalpower: null,
             efficiency: null,
             celltype: '',
-            image_url: '',
+            image_url: ''
         });
     };
 
@@ -35,7 +33,7 @@ const useSolarPanelState = () => {
         { key: 'nominalpower', label: 'Nominalpower', align: 'right' },
         { key: 'efficiency', label: 'Efficiency', align: 'right' },
         { key: 'celltype', label: 'Celltype', align: 'right' },
-        { key: 'image_url', label: 'Image_url', align: 'right' },
+        { key: 'image_url', label: 'Image', align: 'right' }
     ];
 
     const fields = [
@@ -44,7 +42,7 @@ const useSolarPanelState = () => {
         { name: 'nominalpower', label: 'Nominal Power', type: 'number' },
         { name: 'efficiency', label: 'Efficiency', type: 'number' },
         { name: 'celltype', label: 'Cell Type', type: 'text' },
-        { name: 'image_url', label: 'Image_url', type: 'text' }
+        { name: 'image_url', label: 'Image', type: 'text' }
     ];
 
     return {
@@ -58,9 +56,7 @@ const useSolarPanelState = () => {
         setEditedPanel,
         clearEditedPanel,
         columns,
-        fields,
-        reloadData,
-        setReloadData,
+        fields
     };
 };
 

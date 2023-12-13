@@ -10,7 +10,7 @@ const useProjectsState = () => {
         geographic_area: '',
         coordinates: '',
         village_name: '',
-        image_url: '',
+        image_url: ''
     });
 
     const clearEditedProject = () => {
@@ -20,7 +20,7 @@ const useProjectsState = () => {
             geographic_area: '',
             coordinates: '',
             village_name: '',
-            image_url: '',
+            image_url: ''
         });
     };
 
@@ -29,16 +29,16 @@ const useProjectsState = () => {
         { key: 'description', label: 'Description', align: 'right' },
         { key: 'geographic_area', label: 'Geographic Area', align: 'right'},
         { key: 'coordinates', label: 'Coordinates', align: 'right' },
-        { key: 'village_name', label: 'Village_name', align: 'right' },
-        { key: 'image_url', label: 'Image_url', align: 'right' },
+        { key: 'village_name', label: 'Village', align: 'right' },
+        { key: 'image_url', label: 'Image', align: 'right' }
     ];
 
     const fields = [
         { name: 'description', label: 'Description', align: 'right' },
         { name: 'geographic_area', label: 'Geographic Area', align: 'right'},
         { name: 'coordinates', label: 'Coordinates', align: 'right' },
-        { name: 'village_name', label: 'Village_name', align: 'right' },
-        { name: 'image_url', label: 'Image_url', type: 'text' }
+        { name: 'village_name', label: 'Village', align: 'right' },
+        { name: 'image_url', label: 'Image', type: 'text' }
     ];
 
     return {

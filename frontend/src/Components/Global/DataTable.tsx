@@ -53,7 +53,9 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
                             <StyledTableCell key={column.key} align={column.align}>{column.label}</StyledTableCell>
                         ))}
                         <StyledTableCell align="right">Update</StyledTableCell>
-                        <StyledTableCell align="right">Is_disabled</StyledTableCell>
+                        {onEnable ? (
+                            <StyledTableCell align="right">Is_disabled</StyledTableCell>
+                        ): null}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -66,16 +68,22 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
                                         {column.key === 'image_url' ? (
                                             <img src={`http://localhost:8080/images/${row[column.key]}`} alt="Image" style={{ maxWidth: '50px', maxHeight: '50px' }} />
                                             ) : (
-                                            row[column.key]
+                                                column.key === 'password' ? (
+                                                    '******'
+                                                ): (    
+                                                    row[column.key]
+                                                )
                                         )}
                                     </StyledTableCell>
                                 ))}
                                 <StyledTableCell align="right">
                                     <BtnEdit onClick={(e: any) => onEdit(e, row[idKey])} />
                                 </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <BtnEnabled classState={row.is_disabled} onClick={() => onEnable(row[idKey])} />
-                                </StyledTableCell>
+                                {onEnable ? (
+                                    <StyledTableCell align="right">
+                                        <BtnEnabled classState={row.is_disabled} onClick={() => onEnable(row[idKey])} />
+                                    </StyledTableCell>
+                                ) : null}
                             </StyledTableRow>
                         ))}
                 </TableBody>

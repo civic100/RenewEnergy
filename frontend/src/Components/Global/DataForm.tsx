@@ -5,6 +5,9 @@ import TextField from '@mui/material/TextField';
 import "../../assets/style/Button.css";
 import ImageUpload from './ImageUpload.tsx';
 import { useState } from 'react';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
 
 const DataForm = ({ fields, editedType, editedData, onChange, onSubmit, onClose, anchorEl, onImageSubmit, onDeleteImage }) => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -28,7 +31,7 @@ const DataForm = ({ fields, editedType, editedData, onChange, onSubmit, onClose,
                 return prevImage || imageFile;
             });
         }
-        
+
     };
 
     return (
@@ -51,17 +54,40 @@ const DataForm = ({ fields, editedType, editedData, onChange, onSubmit, onClose,
                         field.name === 'image_url' ? (
                             <ImageUpload key={field.name} onImageSelect={handleImageSelect} />
                         ) : (
-                            <TextField
-                                key={field.name}
-                                label={field.label}
-                                name={field.name}
-                                value={editedData[field.name] !== null ? editedData[field.name] : ''}
-                                onChange={onChange}
-                            />
+                            field.name === 'frequency' ? (
+                                <Select
+                                    label={field.label}
+                                    name={field.name}
+                                    value={editedData[field.name] || ''}
+                                    onChange={onChange}>
+                                    <MenuItem value="monthly">Monthly</MenuItem>
+                                    <MenuItem value="annual">Annual</MenuItem>
+                                    <MenuItem value="weekly">Weekly</MenuItem>
+                                </Select>
+                            ) : (
+                                field.name === 'user_type' ? (
+                                    <Select
+                                        label={field.label}
+                                        name={field.name}
+                                        value={editedData[field.name] || ""}
+                                        onChange={onChange}>
+                                        <MenuItem value="normal">Normal</MenuItem>
+                                        <MenuItem value="company">Company</MenuItem>
+                                    </Select>
+                                ) : (
+                                    <TextField
+                                        key={field.name}
+                                        label={field.label}
+                                        name={field.name}
+                                        value={editedData[field.name] !== null ? editedData[field.name] : ''}
+                                        onChange={onChange}
+                                    />
+                                )
+                            )
                         )
                     ))}
                     {selectedImage && (
-                    <p>Imagen seleccionada: {selectedImage.name}</p>
+                        <p>Imagen seleccionada: {selectedImage.name}</p>
                     )}
                     <Button variant="contained" className="btn-color" onClick={onSubmit}>
                         {editedType === 'Edit' ? 'Save' : 'Add'}

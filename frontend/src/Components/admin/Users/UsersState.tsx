@@ -5,32 +5,32 @@ const useUsersState = () => {
     const [editPopoverAnchorEl, setEditPopoverAnchorEl] = useState(null);
     const [createPopoverAnchorEl, setCreatePopoverAnchorEl] = useState(null);
     const [editedUsers, setEditedUsers] = useState({
-        id_users: null,
+        id_user: null,
         name: '',
         email: '',
         password: '',
         user_type: '',
-        image_url: '',
+        image_url: ''
     });
 
     const clearEditedUsers = () => {
         setEditedUsers({
-            id_users: null,
+            id_user: null,
             name: '',
             email: '',
             password: '',
             user_type: '',
-            image_url: '',
+            image_url: ''
         });
     };
 
     const columns = [
-        { key: 'id_users', label: 'Id', align: 'right' },
+        { key: 'id_user', label: 'Id', align: 'right' },
         { key: 'name', label: 'Name', align: 'right' },
         { key: 'email', label: 'Email', align: 'right' },
         { key: 'password', label: 'Password', align: 'right' },
         { key: 'user_type', label: 'Type', align: 'right' },
-        { key: 'image_url', label: 'Image', align: 'right' },
+        { key: 'image_url', label: 'Image', align: 'right' }
     ];
 
     const fields = [

@@ -5,7 +5,6 @@ import useSolarPanelState from './SolarPanelsState.tsx';
 import BtnCreate from '../../Button/BtnCreateComponent.tsx';
 import axios from 'axios';
 
-
 const SolarPanelsComponent = () => {
     const {
         solarPanels,
@@ -37,7 +36,6 @@ const SolarPanelsComponent = () => {
                 const data = await response.json();
                 setSolarPanels(data);
                 setUpdated(true); // Marcar que la actualización se ha realizado
-
             } catch (error) {
                 console.error('Error:', error);
             }

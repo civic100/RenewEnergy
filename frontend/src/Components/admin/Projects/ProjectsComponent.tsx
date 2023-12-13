@@ -3,6 +3,7 @@ import DataTable from '../../Global/DataTable.tsx';
 import DataForm from '../../Global/DataForm.tsx';
 import useProjectsState from './useProjectsState.tsx';
 import BtnCreate from '../../Button/BtnCreateComponent.tsx';
+import axios from 'axios';
 
 const ProjectsComponent = () => {
     const {
@@ -20,6 +21,9 @@ const ProjectsComponent = () => {
     } = useProjectsState();
     const [updated, setUpdated] = useState(false);
     const [selectedImageFromForm, setSelectedImageFromForm] = useState(null);
+    const axiosInstance = axios.create({
+        baseURL: 'http://localhost:8080',  // Reemplaza con la URL de tu servidor
+    });
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -154,6 +158,15 @@ const ProjectsComponent = () => {
         setCreatePopoverAnchorEl(event.currentTarget);
     };
 
+    const deleteImage = async (imageName) => {
+        try {
+            const response = await axiosInstance.delete(`/images/${imageName}`);
+            console.log(response.data);  // Mensaje de éxito o error desde el servidor
+        } catch (error) {
+            console.error('Error al eliminar la imagen:', error);
+        }
+    };
+
     return (
         <>
             <BtnCreate onClick={handlePOST}/>
@@ -165,7 +178,8 @@ const ProjectsComponent = () => {
             onSubmit={handleFormSubmit} 
             onClose={handleClose} 
             anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} 
-            onImageSubmit={setSelectedImageFromForm}/>
+            onImageSubmit={setSelectedImageFromForm}
+            onDeleteImage={deleteImage}/>
         </>
     );
 
