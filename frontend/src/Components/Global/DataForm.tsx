@@ -5,42 +5,30 @@ import TextField from '@mui/material/TextField';
 import "../../assets/style/Button.css";
 import ImageUpload from './ImageUpload.tsx';
 import { useState } from 'react';
-import axios from 'axios';
 
-const DataForm = ({ fields, editedType, editedData, onChange, onSubmit, onClose, anchorEl }) => {
+const DataForm = ({ fields, editedType, editedData, onChange, onSubmit, onClose, anchorEl, onImageSubmit, onDeleteImage }) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageSelect = (imageFile) => {
         // Actualiza el estado cuando se selecciona una imagen
         setSelectedImage(imageFile);
-    };
 
-    const handleFormSubmit = () => {
-        // Puedes manejar el archivo seleccionado aquí, por ejemplo, guardándolo en el sistema de archivos
-        if (selectedImage) {
-            const url = URL.createObjectURL(selectedImage);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = selectedImage.name;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        };
-
-        if (selectedImage) {
-            // Crear un objeto FormData y agregar la imagen a él
-            const formData = new FormData();
-            formData.append('image', selectedImage);
-
-            axios.post('http://localhost:8080/images', formData)
-                .then(response => {
-                    console.log('Imagen guardada con éxito:', response.data);
-                })
-                .catch(error => {
-                    console.error('Error al guardar la imagen:', error);
-                });
+        onDeleteImage(editedData.image_url);
+        // Actualiza el estado editedPanel con el nombre de la imagen seleccionada
+        onChange({
+            target: {
+                name: 'image_url',
+                value: imageFile.name,
+            },
+        });
+        if (onImageSubmit) {
+            // Utiliza el callback en setImagen para asegurar que tiene el valor actualizado
+            setSelectedImage((prevImage) => {
+                onImageSubmit(prevImage || imageFile);
+                return prevImage || imageFile;
+            });
         }
+        
     };
 
     return (
