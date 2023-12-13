@@ -19,6 +19,7 @@ const ProjectsComponent = () => {
         fields
     } = useProjectsState();
     const [updated, setUpdated] = useState(false);
+    const [selectedImageFromForm, setSelectedImageFromForm] = useState(null);
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -119,6 +120,20 @@ const ProjectsComponent = () => {
                 }
             }
 
+            if (selectedImageFromForm) {
+                // Hacer algo con la imagen seleccionada, como enviarla a la API
+                const formData = new FormData();
+                formData.append('image', selectedImageFromForm);
+
+                await axios.post('http://localhost:8080/images', formData)
+                .then(response => {
+                    console.log('Imagen guardada con éxito:', response.data);
+                })
+                .catch(error => {
+                    console.error('Error al guardar la imagen:', error);
+                });
+            }
+
             // Actualizar la lista de paneles project después de editar o agregar
             const updatedProjects = projects.map((project) =>
                 project.id_project === editedProject.id_project ? editedProject : project
@@ -143,7 +158,14 @@ const ProjectsComponent = () => {
         <>
             <BtnCreate onClick={handlePOST}/>
             <DataTable columns={columns} data={projects} onEnable={handlePATCH} onEdit={handlePUT} idKey='id_project' />
-            <DataForm fields={fields} editedType={editedProject.id_project ? 'Edit' : 'Add'} editedData={editedProject} onChange={handleFormChange} onSubmit={handleFormSubmit} onClose={handleClose} anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} />
+            <DataForm fields={fields} 
+            editedType={editedProject.id_project ? 'Edit' : 'Add'} 
+            editedData={editedProject} 
+            onChange={handleFormChange} 
+            onSubmit={handleFormSubmit} 
+            onClose={handleClose} 
+            anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} 
+            onImageSubmit={setSelectedImageFromForm}/>
         </>
     );
 

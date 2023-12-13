@@ -1,9 +1,12 @@
+import React, { useEffect, useState } from 'react';
 import { useEffect } from 'react';
 
 import DataTable from '../../Global/DataTable.tsx';
 import DataForm from '../../Global/DataForm.tsx';
 import useSolarPanelState from './SolarPanelsState.tsx';
 import BtnCreate from '../../Button/BtnCreateComponent.tsx';
+import axios from 'axios';
+
 
 const SolarPanelsComponent = () => {
     const {
@@ -20,7 +23,11 @@ const SolarPanelsComponent = () => {
         fields
     } = useSolarPanelState();
     const [updated, setUpdated] = useState(false);
-    
+    const [selectedImageFromForm, setSelectedImageFromForm] = useState(null);
+    const axiosInstance = axios.create({
+        baseURL: 'http://localhost:8080',  // Reemplaza con la URL de tu servidor
+    });
+
     useEffect(() => {
         const fetchSolarPanels = async () => {
             try {
@@ -93,7 +100,7 @@ const SolarPanelsComponent = () => {
                     },
                     body: JSON.stringify(editedPanel),
                 });
-    
+
                 if (!response.ok) {
                     throw new Error('Error al editar el panel solar');
                 }
@@ -106,21 +113,35 @@ const SolarPanelsComponent = () => {
                     },
                     body: JSON.stringify(editedPanel),
                 });
-    
+
                 if (!response.ok) {
                     throw new Error('Error al agregar el panel solar');
                 }
-    
+
                 // Verifica si la respuesta tiene datos antes de intentar analizarla
                 const responseData = await response.text();
                 const newPanel = responseData ? JSON.parse(responseData) : null;
-    
+
                 if (newPanel) {
                     // Agrega la nueva placa solar a la lista
                     setSolarPanels([...solarPanels, newPanel]);
                 }
             }
-    
+
+            if (selectedImageFromForm) {
+                // Hacer algo con la imagen seleccionada, como enviarla a la API
+                const formData = new FormData();
+                formData.append('image', selectedImageFromForm);
+
+                await axios.post('http://localhost:8080/images', formData)
+                    .then(response => {
+                        console.log('Imagen guardada con éxito:', response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error al guardar la imagen:', error);
+                    });
+            }
+
             // Actualizar la lista de paneles solares después de editar o agregar
             const updatedSolarPanels = solarPanels.map((panel) =>
                 panel.id_solarpanel === editedPanel.id_solarpanel ? editedPanel : panel
@@ -132,7 +153,7 @@ const SolarPanelsComponent = () => {
             console.error('Error:', error);
         }
     };
-    
+
     const handlePOST = async (event) => {
         // Al hacer clic en el botón "Create", establece el estado de editedPanel a un nuevo objeto
         clearEditedPanel();
@@ -141,11 +162,28 @@ const SolarPanelsComponent = () => {
         setCreatePopoverAnchorEl(event.currentTarget);
     };
 
+    const deleteImage = async (imageName) => {
+        try {
+            const response = await axiosInstance.delete(`/images/${imageName}`);
+            console.log(response.data);  // Mensaje de éxito o error desde el servidor
+        } catch (error) {
+            console.error('Error al eliminar la imagen:', error);
+        }
+    };
+
     return (
         <>
-            <BtnCreate onClick={handlePOST}/>
-            <DataTable columns={columns} data={solarPanels} onEnable={handlePATCH} onEdit={handlePUT} idKey="id_solarpanel"/>
-            <DataForm fields={fields} editedType={editedPanel.id_solarpanel ? 'Edit' : 'Add'} editedData={editedPanel} onChange={handleFormChange} onSubmit={handleFormSubmit} onClose={handleClose} anchorEl={editPopoverAnchorEl || createPopoverAnchorEl} />
+            <BtnCreate onClick={handlePOST} />
+            <DataTable columns={columns} data={solarPanels} onEnable={handlePATCH} onEdit={handlePUT} idKey="id_solarpanel" />
+            <DataForm fields={fields}
+                editedType={editedPanel.id_solarpanel ? 'Edit' : 'Add'}
+                editedData={editedPanel}
+                onChange={handleFormChange}
+                onSubmit={handleFormSubmit}
+                onClose={handleClose}
+                anchorEl={editPopoverAnchorEl || createPopoverAnchorEl}
+                onImageSubmit={setSelectedImageFromForm} 
+                onDeleteImage={deleteImage}/>
         </>
     );
 };
