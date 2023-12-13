@@ -1,4 +1,3 @@
-import React from "react";
 import Style from '../../../assets/style/Home/SectionHome1.module.css';
 import GIF from '../../../assets/images/energia-solar.gif';
 

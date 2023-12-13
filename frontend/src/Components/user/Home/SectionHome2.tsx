@@ -1,4 +1,3 @@
-import React from "react";
 import Style from '../../../assets/style/Home/SectionHome2.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSolarPanel } from "@fortawesome/free-solid-svg-icons";

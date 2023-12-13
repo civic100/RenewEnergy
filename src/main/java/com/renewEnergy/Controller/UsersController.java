@@ -24,7 +24,6 @@ import com.renewEnergy.Model.UsersDTO;
 import com.renewEnergy.Service.CompaniesService;
 import com.renewEnergy.Service.EnergyFootPrintService;
 import com.renewEnergy.Service.UsersService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/users")

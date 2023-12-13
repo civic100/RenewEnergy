@@ -1,16 +1,15 @@
-// AccountMenuAdmin.tsx
-
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import navBarStyle from "../../../assets/style/NavBar.module.css";
 import IconProfile from "../../Global/IconProfile";
 import imgLogo from "../../../assets/images/logo.png";
 
 interface AccountMenuUserProps {
   isAuthenticated: boolean;
+  onLogout: () => void;
 }
 
-const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated }) => {
+const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated, onLogout }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -42,7 +41,7 @@ const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated }) =>
                 <Link to='/register'>Registrarse</Link>
               </div>
               <div className={navBarStyle.login}>
-                <Link to='/login'>Iniciar Sisión</Link>
+                <Link to='/login'>Iniciar Sesión</Link>
               </div>
             </>
           )}
@@ -50,12 +49,10 @@ const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated }) =>
           {isAuthenticated && (
             <>
               <div className='item'>
-                <IconProfile />
+                <IconProfile onLogout={onLogout} />
               </div>
             </>
           )}
-         
-          
         </div>
       </div>
     </div>
@@ -63,3 +60,4 @@ const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated }) =>
 };
 
 export default AccountMenuUser;
+

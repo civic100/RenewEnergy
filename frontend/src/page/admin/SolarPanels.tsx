@@ -1,4 +1,4 @@
-import React from 'react';
+
 import SolarPanelsComponent from '../../Components/admin/SolarPanels/SolarPanelsComponent';
 function SolarPanels() {
 

@@ -2,7 +2,6 @@
 import React from 'react';
 import AccountMenuAdmin from '../Components/Menu/admin/AccountMenuAdminComponent';
 import AccountMenuUser from '../Components/Menu/user/AccountMenuUserComponent';
-import { Link } from 'react-router-dom';
 
 interface NavBarProps {
   isAuthenticated: boolean;
@@ -15,15 +14,10 @@ const NavBar: React.FC<NavBarProps> = ({ isAuthenticated, isAdmin, onLogout }) =
     <div className="menu">
       <nav>
         {isAuthenticated ? (
-          isAdmin ? <AccountMenuAdmin /> : <AccountMenuUser isAuthenticated={isAuthenticated} />
+          isAdmin ? <AccountMenuAdmin /> : <AccountMenuUser isAuthenticated={isAuthenticated} onLogout={onLogout} />
         ) : (
-          <AccountMenuUser isAuthenticated={isAuthenticated}/>
+          <AccountMenuUser isAuthenticated={isAuthenticated} onLogout={onLogout} />
         )}
-        <ul>
-          {isAuthenticated && (
-            <li onClick={onLogout}>Cerrar sesión</li>
-          )}
-        </ul>
       </nav>
     </div>
   );

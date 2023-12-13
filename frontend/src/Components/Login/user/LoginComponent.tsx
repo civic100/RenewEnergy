@@ -34,6 +34,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
     };
 
     return (
+        
         <div>
             <h2>Inicio de sesión de usuario</h2>
             <form>

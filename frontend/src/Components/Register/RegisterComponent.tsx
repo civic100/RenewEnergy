@@ -1,5 +1,3 @@
-// RegisterComponent.tsx
-
 import React, { useState } from 'react';
 import ImageUpload from '../Global/ImageUpload';
 import { Navigate } from 'react-router-dom';
