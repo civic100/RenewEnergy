@@ -1,5 +1,6 @@
 button.btn-color{
     background-color: #f5be0c;
+    color: white;
 }
 button.btn-color:hover {
     background-color: #fbdc24;

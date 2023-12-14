@@ -2,12 +2,12 @@
 
 
 
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-    }
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	margin-top: 80px;
+}
 
 .screen {		
 	background: linear-gradient(90deg, #f5be0c, #fdf68a);		

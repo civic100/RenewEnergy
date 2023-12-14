@@ -1,37 +1,34 @@
+import GIF from '../../../assets/images/energia-solar-4.gif';
+import Button from '@mui/material/Button';
+import "../../../assets/style/Button.css";
 import Style from '../../../assets/style/Home/SectionHome1.module.css';
-import GIF from '../../../assets/images/energia-solar.gif';
 
 export default function SectionHome1() {
-    return(
-        <div className={Style.container}>
-            <div className={Style.sections}>
-                <div className={Style.row}>
-                    <div className={Style.section1}>
-                        <div className={Style.title}>Únete a nosotros para reforestar el mundo</div>
-                    </div>
-                    <div className={Style.section2}>
-                        <img src={GIF} alt="" />
-                    </div>
-                </div>
+    return (
+        <div className={Style.homeheader}>
+            <div  className={Style.container}>
+                <div className={Style.homeheaderinnercontainer}>
+                    <h1 className={Style.homeheadertitle}>Únete a la energía solar ¡Impacto positivo global!</h1>
+                    <p className={Style.homeheadersubtitle}>
+                    La manera más sencilla para que ciudadanos y empresas contribuyan a la expansión de la energía solar y compensen sus emisiones de CO2, mediante la instalación de paneles solares y la promoción de una huella de carbono neutral
+                    </p>
 
-                <div className={Style.row}>
-                    <div className={Style.section3}>
-                        <div className={Style.description}>
-                            Juntos, podemos construir un mañana más brillante, impulsado por la energía limpia del sol. ¡Haz la diferencia hoy!"
-                        </div>
-                        <div className={Style.button}>
-                            <div className="">
-                                Contribuir
-                            </div>
-                        </div>
+                    <Button className='btn-color'> Contribuir </Button>
+
+                    <div className={Style.homeheadercounter}>
+                        <p className={Style.homeheadercountervalue}>3600</p>
+                        <p className={Style.homeheadercounterlabel}>paneles solares instalados hasta hoy</p>
                     </div>
-                {/*
-                <div className={Style.section4}>
-                    <h1>b</h1>
                 </div>
-            */}
-                </div>
+            </div>
+            <div className={Style.homeheaderimgwrap}>
+                <img
+                    className={Style.homeheaderimg}
+                    alt="RenewEnergy por la Energia solar"
+                    src={GIF}
+                />
+
             </div>
         </div>
     );
-}
+};

@@ -10,10 +10,10 @@ const ImageUpload = ({ onImageSelect }) => {
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     return (
-        <div>
+        <div className='box-zone'>
             <div {...getRootProps()} className='zone'>
                 <input {...getInputProps()} />
-                <p>Arrastra y suelta una imagen aquí, o haz clic para seleccionar una.</p>
+                <p>Selecciona tu imagen:</p>
             </div>
         </div>
     );

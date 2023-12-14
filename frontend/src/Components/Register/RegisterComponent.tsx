@@ -70,7 +70,7 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
 
   return (
     <div className="container">
-      <div className="screen">
+      <div className="screen" style={{ height: formData.user_type === 'company' ? '800px' : '700px' }}>
         <div className="screen__content">
           <form className="register">
             <div className="register__field">
@@ -114,7 +114,6 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
             <div className="register__field">
                 <p>URL de imagen:<FontAwesomeIcon icon={faImage} className="register__icon register__alin" /></p> 
               <label>
-             
                 <ImageUpload key={formData.image_url} onImageSelect={handleImageSelect} />
               </label>
               {selectedImage && (
@@ -127,14 +126,7 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
               <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
             </button>
             </form>
-          <div className="social-register">
-              <h3>Register in <br/>RenewEnergy </h3>
-              <div className="social-icons">
-                  <a href="#" className="social-register__icon fab fa-instagram"></a>
-                  <a href="#" className="social-register__icon fab fa-facebook"></a>
-                  <a href="#" className="social-register__icon fab fa-twitter"></a>
-              </div>
-          </div>
+
       </div>
       <div className="screen__background">
           <span className="screen__background__shape screen__background__shape4"></span>
