@@ -28,7 +28,6 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
 
             if (response.ok) {
                 const userData = await response.json();
-                console.log(userData);
                 // Actualiza el contexto con los datos del usuario
                 if (userData[0]?.user?.user_type !== 'company') {
                     setUser({
