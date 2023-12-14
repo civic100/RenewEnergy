@@ -1,48 +1,28 @@
 import Style from '../../../assets/style/Home/SectionHome2.module.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSolarPanel } from "@fortawesome/free-solid-svg-icons";
+import Button from '@mui/material/Button';
+import "../../../assets/style/Button.css";
 
 export default function SectionHome2() {
-    return(
-        <div className={Style.objetiveSection}>
-
-                <div className={Style.title}>
-                    OBJETIVO
+    return (
+        <div className={`${Style.homeSe} ${Style.bg1}`}>
+            <div className={Style.container}>
+                <div className={Style.homeSecHead + " " + Style.textCenter}>
+                    <h2 className={Style.homeH2}>Objetivo: alcanzar 1 billón de paneles solares para 2050</h2>
+                    <p className={Style.homeSubtitle1}>
+                        No se puede solucionar el cambio climático sin abordar la transición a la energía renovable. Descubre nuestro{' '}
+                        <a href="https://tree-nation.com/es/proyectos-de-siembra-de-arboles/inside-tree-nation/articulo/19297-on-a-mission-to-plant-1-trillion-trees-by-2050" className={Style.previewListener}>
+                            Plan Maestro
+                        </a>{' '}
+                        para alcanzar este imponente objetivo.
+                    </p>
                 </div>
-            <div className={Style.content}>
-
-                <p className={Style.description}>
-                    Conectando un futuro sostenible: Nuestro compromiso es impulsar la adopción masiva de energía solar, transformando cada instalación en un paso hacia un mundo más limpio y energéticamente independiente.
-                </p>
-
-                <div className={Style.sections}>
-                    <section className={Style.monthSection}>
-                        <div className={Style.icon}>
-                        <FontAwesomeIcon icon={faSolarPanel} size="2xl" style={{color: "#374771"}}/>
-                        </div>
-                        <div className={Style.info}>
-                            <p>2.130 placas instaladas</p>
-                            <div>ESTE MES</div>
-                        </div>
-
-                    </section>
-
-                    <section className={Style.yearSection}>
-                        <div className={Style.icon}>
-                            <FontAwesomeIcon icon={faSolarPanel} size="2xl" style={{color: "#374771"}}/>
-                            <FontAwesomeIcon icon={faSolarPanel} size="2xl" style={{color: "#374771"}}/>
-                            <FontAwesomeIcon icon={faSolarPanel} size="2xl" style={{color: "#374771"}}/>
-                        </div>
-                        <div className={Style.info}>
-                            <p>17.453 placas instaladas</p>
-                            <div>ESTE AÑO</div>
-                        </div>
-
-                    </section>
+                
+                <div className={Style.textCenter}>
+                    <Button className='btn-color'> Proyectos </Button>
                 </div>
-
             </div>
         </div>
+
     );
 }
 

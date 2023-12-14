@@ -10,7 +10,7 @@ export default function SectionHome1() {
                 <div className={Style.homeheaderinnercontainer}>
                     <h1 className={Style.homeheadertitle}>Únete a la energía solar ¡Impacto positivo global!</h1>
                     <p className={Style.homeheadersubtitle}>
-                    La manera más sencilla para que ciudadanos y empresas contribuyan a la expansión de la energía solar y compensen sus emisiones de CO2, mediante la instalación de paneles solares y la promoción de una huella de carbono neutral
+                    La manera más sencilla para que ciudadanas, ciudadanos y empresas contribuyan a la expansión de la energía solar y compensen sus emisiones de CO2, mediante la instalación de paneles solares y la promoción de una huella de carbono neutral.
                     </p>
 
                     <Button className='btn-color'> Contribuir </Button>
