@@ -8,6 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import Menu from '@mui/material/Menu';
+import { Link, useHistory } from 'react-router-dom';
+
 
 interface IconProfileProps {
     onLogout: () => void;
@@ -74,7 +76,7 @@ const IconProfile: React.FC<IconProfileProps> = ({ onLogout }) => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={handleClose}>
+                <MenuItem component={Link} to="/perfil" onClick={handleClose}>
                     <Avatar /> Profile
                 </MenuItem>
                 <MenuItem onClick={onLogout}>

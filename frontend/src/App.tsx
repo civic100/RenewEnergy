@@ -5,6 +5,7 @@ import './App.css';
 
 import Projects from './page/user/Projects';
 import Contributions from './page/user/Contribution';
+import UserPerfil from './page/user/UserPerfil';
 import AdminUsers from './page/admin/Users';
 import AdminContribution from './page/admin/Contribution';
 import AdminProjects from './page/admin/Projects';
@@ -41,6 +42,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contributions" element={<Contributions />} />
+          <Route path='/perfil' element={<UserPerfil />} />
 
           {/* Rutas de administrador */}
           {isAdmin && (

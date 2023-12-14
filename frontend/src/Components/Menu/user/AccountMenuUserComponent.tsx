@@ -45,7 +45,7 @@ const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated, onLo
               </div>
             </>
           )}
-           {/* SI ESTÁ LOGEADO MOSTRAR EL ICONO PROFILE*/}
+          {/* SI ESTÁ LOGEADO MOSTRAR EL ICONO PROFILE*/}
           {isAuthenticated && (
             <>
               <div className='item'>
