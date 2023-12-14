@@ -1,10 +1,5 @@
 .container{
-    font-family: Optima, sans-serif;
-}
-
-.section1 {
-}
-
-.section2 {
-    background-color: #faf9f7;
+    font-family: Manrope,sans-serif;
+    max-width: 1800px;
+    margin: 0 auto;
 }

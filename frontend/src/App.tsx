@@ -15,6 +15,7 @@ import NavBar from './page/NavBar';
 import UserLogin from './Components/Login/user/LoginComponent';
 import RegisterComponent from './Components/Register/RegisterComponent';
 import AdminLogin from './Components/Login/admin/LoginComponent';
+import Error404 from './page/Error404';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -62,6 +63,7 @@ const App: React.FC = () => {
               <Route path="/register" element={<RegisterComponent onRegister={handleRegister} />} />
             </>
           )}
+           <Route path="/*" element={<Error404 />} />
         </Routes>
       </div>
   );

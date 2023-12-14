@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import ImageUpload from '../Global/ImageUpload';
-import { Navigate } from 'react-router-dom';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock, faChevronRight, faEnvelope, faBuilding, faGlobe, faImage} from '@fortawesome/free-solid-svg-icons';
+import '../../assets/style/Register/Register.css'; // Asegúrate de importar el nuevo archivo CSS
 
 const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister }) => {
   const [formData, setFormData] = useState({
@@ -9,19 +12,27 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
     password: '',
     user_type: 'normal', // O 'company', según tu lógica
     image_url: '',
-    // Campos específicos para empresa
     company_name: '',
     website: '',
   });
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event) => {
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [event.target.name]: event.target.value,
     }));
   };
-  
+
+  const handleImageSelect = (imageFile) => {
+    setSelectedImage(imageFile);
+    handleInputChange({
+      target: {
+        name: 'image_url',
+        value: imageFile.name,
+      },
+    });
+  };
 
   const handleRegister = async () => {
     try {
@@ -31,14 +42,25 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-        
       });
-      console.log(formData);
+
       if (response.ok) {
-        // Luego de un registro exitoso, llamas a la función onRegister para redirigir al usuario al login.
-        return <Navigate to="/login" />;
+        if (selectedImage) {
+          const formData = new FormData();
+          formData.append('image', selectedImage);
+
+          await axios.post('http://localhost:8080/images', formData)
+            .then(response => {
+              console.log('Imagen guardada con éxito:', response.data);
+            })
+            .catch(error => {
+              console.error('Error al guardar la imagen:', error);
+            });
+        }
+
+        // Luego de un registro exitoso, llamas a la función onRegister para redirigir al usuario al  .
+        onRegister();
       } else {
-        // Manejar casos de error en la respuesta del servidor
         console.error('Error en el registro:', response.statusText);
       }
     } catch (error) {
@@ -47,56 +69,72 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
   };
 
   return (
-    <div>
-      <h2>Registro de usuario</h2>
-      <form>
-        <label>
-          Nombre:
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Correo electrónico:
-          <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Contraseña:
-          <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Tipo de usuario:
-          <select name="user_type" value={formData.user_type} onChange={handleInputChange}>
-            <option value="normal">Normal</option>
-            <option value="company">Empresa</option>
-          </select>
-        </label>
-        <br />
-        {/* Campos específicos para empresa */}
-        {formData.user_type === 'company' && (
-          <>
-            <label>
-              Nombre de la empresa:
-              <input type="text" name="company_name" value={formData.company_name} onChange={handleInputChange} />
-            </label>
-            <br />
-            <label>
-              Sitio web:
-              <input type="text" name="website" value={formData.website} onChange={handleInputChange} />
-            </label>
-          </>
-        )}
-        <br />
-        <label>
-          URL de imagen:
-          <ImageUpload onImageSelect={handleInputChange} />
-        </label>
-        <br />
-        <button type="button" onClick={handleRegister}>
-          Registrarse
-        </button>
-      </form>
+    <div className="container">
+      <div className="screen" style={{ height: formData.user_type === 'company' ? '800px' : '700px' }}>
+        <div className="screen__content">
+          <form className="register">
+            <div className="register__field">
+              <FontAwesomeIcon icon={faUser} className="register__icon" />
+              <input type="text" className="register__input" placeholder="User name" value={formData.name} onChange={handleInputChange} />
+            </div>
+            <div className="register__field">
+              <FontAwesomeIcon icon={faEnvelope} className="register__icon" />
+              <input type="email" className="register__input" placeholder="Email" value={formData.email} onChange={handleInputChange} />
+            </div>
+            <div className="register__field">
+              <FontAwesomeIcon icon={faLock} className="register__icon" />
+              <input type="password" className="register__input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} />
+            </div>
+            <div className="register__field">
+
+              <select name="user_type" className="register__select" value={formData.user_type} onChange={handleInputChange}>
+                <option value="normal">Normal</option>
+                <option value="company">Empresa</option>
+              </select>
+            </div>
+          
+              {formData.user_type === 'company' && (
+                <>
+                <div className="register__field">
+                  <label>
+                    <FontAwesomeIcon icon={faBuilding} className="register__icon" />
+                    <input type="text"  className="register__input" name="company_name" placeholder="Nombre de la empresa" value={formData.company_name} onChange={handleInputChange} />
+                  </label>
+                </div>
+                <div className="register__field">
+                  <label>
+                  <FontAwesomeIcon icon={faGlobe} className="register__icon" />
+                    <input type="text"  className="register__input" name="website" placeholder="Sitio web" value={formData.website} onChange={handleInputChange} />
+                  </label>
+                </div>
+                </>
+              )}
+          
+
+            <div className="register__field">
+                <p>URL de imagen:<FontAwesomeIcon icon={faImage} className="register__icon register__alin" /></p> 
+              <label>
+                <ImageUpload key={formData.image_url} onImageSelect={handleImageSelect} />
+              </label>
+              {selectedImage && (
+                <p>Imagen seleccionada: {selectedImage.name}</p>
+              )}
+            </div>
+
+            <button className="button register__submit" type="button" onClick={handleRegister}>
+              <span className="button__text">Register</span>
+              <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
+            </button>
+            </form>
+
+      </div>
+      <div className="screen__background">
+          <span className="screen__background__shape screen__background__shape4"></span>
+          <span className="screen__background__shape screen__background__shape3"></span>		
+          <span className="screen__background__shape screen__background__shape2"></span>
+          <span className="screen__background__shape screen__background__shape1"></span>
+      </div>		
+    </div>
     </div>
   );
 };
