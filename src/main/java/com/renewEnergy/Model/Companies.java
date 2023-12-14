@@ -23,7 +23,7 @@ public class Companies {
     private Integer id_company;
 
     @OneToOne
-    @JoinColumn(name = "id_user", insertable = false, updatable = false)
+    @JoinColumn(name = "id_user", insertable = true, updatable = false)
     private Users user;
 
     @Column(name = "company_name")

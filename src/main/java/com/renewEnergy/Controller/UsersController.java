@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.renewEnergy.Model.Companies;
+import com.renewEnergy.Model.CompaniesDTO;
 import com.renewEnergy.Model.EnergyFootPrint;
+import com.renewEnergy.Model.UserType;
 import com.renewEnergy.Model.Users;
 import com.renewEnergy.Model.UsersDTO;
 import com.renewEnergy.Service.CompaniesService;
@@ -45,16 +47,49 @@ public class UsersController {
 	public Optional<Users> getUsersById(@PathVariable Integer id) {
 		return usersService.findUsersById(id);
 	}
-    @PostMapping()
-    public ResponseEntity<String> addUsers(@RequestBody UsersDTO usersDTO) {
+
+   @PostMapping()
+    public ResponseEntity<String> addUsers(@RequestBody Map<String, String> requestBody) {
         try {
-            if (usersService.authenticateEmail(usersDTO).isPresent()) {
+            // Extraer campos del mapa
+            String companyName = requestBody.get("company_name");
+            String email = requestBody.get("email");
+            String imageUrl = requestBody.get("image_url");
+            String name = requestBody.get("name");
+            String password = requestBody.get("password");
+            String userType = requestBody.get("user_type");
+            String website = requestBody.get("website");
+
+            UserType usersType = UserType.valueOf(userType.toLowerCase());
+
+            // Crear instancias de UserDTO y CompanyDTO
+            UsersDTO userDTO = new UsersDTO();
+            userDTO.setEmail(email);
+            userDTO.setName(name);
+            userDTO.setPassword(password);
+            userDTO.setUser_type(usersType);
+
+            CompaniesDTO companyDTO = new CompaniesDTO();
+            companyDTO.setCompany_name(companyName);
+            companyDTO.setImage_url(imageUrl);
+            companyDTO.setWebsite(website);
+
+            // Verificar el correo electrónico
+            if (usersService.authenticateEmail(userDTO).isPresent()) {
                 throw new RuntimeException("El correo electrónico ya existe");
             }
-            usersService.addUsers(usersDTO);
-            return ResponseEntity.ok("Usuario creado correctamente");
+
+            // Lógica para agregar usuario y compañía   
+            usersService.addUsers(userDTO);
+            // Lógica para agregar compañía
+            Users user = usersService.authenticateEmail(userDTO).get();
+            if(user != null){
+                companyDTO.setUser(user);
+                companiesService.addCompanie(companyDTO);
+            }
+            return ResponseEntity.ok("Usuario y compañía creados correctamente");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el usuario: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el usuario y la compañía: " + e.getMessage());
         }
     }
     

@@ -31,8 +31,9 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        
       });
-
+      console.log(formData);
       if (response.ok) {
         // Luego de un registro exitoso, llamas a la función onRegister para redirigir al usuario al login.
         return <Navigate to="/login" />;
