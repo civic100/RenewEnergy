@@ -68,7 +68,8 @@ public class UsersController {
             userDTO.setName(name);
             userDTO.setPassword(password);
             userDTO.setUser_type(usersType);
-
+            userDTO.setImage_url(imageUrl);
+            
             CompaniesDTO companyDTO = new CompaniesDTO();
             companyDTO.setCompany_name(companyName);
             companyDTO.setImage_url(imageUrl);

@@ -1,12 +1,16 @@
 import {Outlet} from "react-router-dom";
-import React from "react";
 import AccountMenuUser from "../Components/Menu/user/AccountMenuUserComponent";
 
-const NavBar = () => {
+interface NavBarProps {
+    isAuthenticated: boolean;
+    onLogout: () => void;
+  }
+
+const NavBar : React.FC<NavBarProps> = ({ isAuthenticated, onLogout}) => {
     return (
         <div className="menu">
             <nav>
-                <AccountMenuUser/>
+                <AccountMenuUser isAuthenticated={isAuthenticated} onLogout={onLogout} />
             </nav>
             <Outlet />
         </div>
