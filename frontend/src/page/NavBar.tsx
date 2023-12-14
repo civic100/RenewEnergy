@@ -20,12 +20,12 @@ const NavBar: React.FC<NavBarProps> = ({ isAuthenticated, onLogout }) => {
           <AccountMenuUser />
         )}
         <ul>
-         
+
           {isAuthenticated ? (
             <li onClick={onLogout}>Cerrar sesión</li>
           ) : (
             <>
-           
+
             </>
           )}
         </ul>
