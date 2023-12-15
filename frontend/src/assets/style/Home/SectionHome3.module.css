@@ -1,13 +1,12 @@
 /* Estilos Generales */
 .homeSec {
-    padding: 7rem 0;
+    padding: 5rem 0;
 }
 
 .bgWhite {
     background-color: white;
 }
 .homeSecHead{
-    margin-bottom: 5rem;
 }
 .textCenter {
     text-align: center!important;
@@ -19,7 +18,7 @@
     font-size: 2.8125rem;
     font-weight: 600;
     line-height: 1.3;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .homeSubtitle1 {
@@ -51,12 +50,13 @@
     padding-bottom: 2rem!important;
 }
 .colmd8  {
-
+    padding-right: 1%;
+    padding-left: 1%;
 }
 
 .collg4{
     flex: 0 0 auto;
-    width: 33.33333333%;
+    width: 28%;
 }
 .row{
     --bs-gutter-x: 1.5rem;
@@ -66,7 +66,6 @@
     margin-left: calc(var(--bs-gutter-x)*-.5);
     margin-right: calc(var(--bs-gutter-x)*-.5);
     margin-top: calc(var(--bs-gutter-y)*-1);
-    
 }
 .justifyContentCenter{
     justify-content: center!important;
@@ -108,14 +107,16 @@
     font-weight: 700;
     line-height: 1.2;
     margin: 0 0 1rem;
+    margin-right: 0.4rem;
 }
 
 .textPrimary {
-
+    opacity: 1;
+    color: #fbdc24;
 }
 
 .textPrimary2 {
-
+    color: #b36a09;
 }
 
 .serviceBoxSub {
@@ -125,9 +126,11 @@
     font-weight: 400;
     line-height: 1.5;
     line-height: 1.3;
-    margin-bottom: 2rem;
-}
 
+}
+.spanSpace{
+    margin-right: 7px;
+}
 .dFlex {
     display: flex!important;
 }
@@ -153,6 +156,5 @@
 }
 
 .serviceBoxCtas {
-    margin-top: 2rem;
     text-align: center;
 }
