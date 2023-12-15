@@ -1,9 +1,11 @@
-import React from 'react';
-import ContributionComponent from "../../Components/user/Contribution/ContributionComponent";
+import ContributionComponent1 from "../../Components/user/Contribution/ContributionComponent1";
 function Contribution() {
 
     return (
-        <ContributionComponent/>
+        <div>
+              <ContributionComponent1/>
+        </div>
+      
     );
 }
 

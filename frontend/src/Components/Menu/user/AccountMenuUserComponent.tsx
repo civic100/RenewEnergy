@@ -32,7 +32,7 @@ const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated, onLo
             <Link to='/projects'>Proyectos</Link>
           </div>
           <div className={navBarStyle.item}>
-            <Link to='/contribute'>Contribuir</Link>
+            <Link to='/contributions'>Contribuir</Link>
           </div>
           {/* Ocultar cuando esté autenticado */}
           {!isAuthenticated && (
