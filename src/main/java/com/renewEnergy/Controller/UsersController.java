@@ -37,18 +37,17 @@ public class UsersController {
     @Autowired
     EnergyFootPrintService energyFootPrintService;
 
-
     @GetMapping()
-	public List<Users> getUsers() {
-		return usersService.findAllUsers();
-	}
+    public List<Users> getUsers() {
+        return usersService.findAllUsers();
+    }
 
     @GetMapping("{id}")
-	public Optional<Users> getUsersById(@PathVariable Integer id) {
-		return usersService.findUsersById(id);
-	}
+    public Optional<Users> getUsersById(@PathVariable Integer id) {
+        return usersService.findUsersById(id);
+    }
 
-   @PostMapping()
+    @PostMapping()
     public ResponseEntity<String> addUsers(@RequestBody Map<String, String> requestBody) {
         try {
             // Extraer campos del mapa
@@ -69,7 +68,7 @@ public class UsersController {
             userDTO.setPassword(password);
             userDTO.setUser_type(usersType);
             userDTO.setImage_url(imageUrl);
-            
+
             CompaniesDTO companyDTO = new CompaniesDTO();
             companyDTO.setCompany_name(companyName);
             companyDTO.setImage_url(imageUrl);
@@ -80,52 +79,58 @@ public class UsersController {
                 throw new RuntimeException("El correo electrónico ya existe");
             }
 
-            // Lógica para agregar usuario y compañía   
+            // Lógica para agregar usuario y compañía
             usersService.addUsers(userDTO);
             // Lógica para agregar compañía
             Users user = usersService.authenticateEmail(userDTO).get();
-            if(user != null){
+            if (user != null) {
                 companyDTO.setUser(user);
                 companiesService.addCompanie(companyDTO);
             }
             return ResponseEntity.ok("Usuario y compañía creados correctamente");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el usuario y la compañía: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al crear el usuario y la compañía: " + e.getMessage());
         }
     }
-    
-	@PutMapping("{id}")
-	public void putUsers(@RequestBody UsersDTO usersDTO,@PathVariable Integer id){
+
+    @PutMapping("{id}")
+    public void putUsers(@RequestBody UsersDTO usersDTO, @PathVariable Integer id) {
         usersService.putUsers(usersDTO, id);
     }
 
-	@PatchMapping("{id}")
+    @PatchMapping("{id}")
     public void patchUsers(@PathVariable("id") Integer id) {
         usersService.patchUsers(id);
     }
 
-    //Login
+    // Login
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UsersDTO usersDTO) {
         try {
-            // Se llama al servicio para obtener un objeto Users basado en la información proporcionada en el UsersDTO.
+            // Se llama al servicio para obtener un objeto Users basado en la información
+            // proporcionada en el UsersDTO.
             Users user = usersService.getUserId(usersDTO);
-            // Se verifica si la autenticación fue exitosa comparando si el ID de usuario obtenido no es nulo.
+            // Se verifica si la autenticación fue exitosa comparando si el ID de usuario
+            // obtenido no es nulo.
             boolean isAuthenticated = user.getId_user() != null;
             // Si la autenticación es exitosa:
             if (isAuthenticated) {
                 // Se obtienen las empresas asociadas al usuario.
                 List<Companies> companies = companiesService.findComapniesByUserId(user.getId_user());
-                // Si hay empresas asociadas, se devuelve una respuesta con la lista de empresas.
+                // Si hay empresas asociadas, se devuelve una respuesta con la lista de
+                // empresas.
                 if (!companies.isEmpty()) {
                     return ResponseEntity.ok(companies);
                 } else {
-                    // Si no hay empresas asociadas, se devuelve una respuesta con la información del usuario.
+                    // Si no hay empresas asociadas, se devuelve una respuesta con la información
+                    // del usuario.
                     return ResponseEntity.ok(user);
                 }
             }
         } catch (NoSuchElementException e) {
-            // Si la autenticación falla, se devuelve una respuesta de error 401 (UNAUTHORIZED) con un mensaje indicando credenciales inválidas.
+            // Si la autenticación falla, se devuelve una respuesta de error 401
+            // (UNAUTHORIZED) con un mensaje indicando credenciales inválidas.
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }
         return null;
@@ -141,19 +146,18 @@ public class UsersController {
         }
     }
 
-
     @GetMapping("/sumenergy/{userId}")
     public ResponseEntity<?> getSumEnergy(@PathVariable Integer userId) {
-       try {
+        try {
             Map<String, Double> averages = energyFootPrintService.getSumEnergyUser(userId);
             return ResponseEntity.ok(averages);
-       }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-       }
+        }
     }
-    
+
     @GetMapping("/energyfootprints/{userId}")
-        public ResponseEntity<?> getAllEnergyFootprintsForUser(@PathVariable Integer userId) {
+    public ResponseEntity<?> getAllEnergyFootprintsForUser(@PathVariable Integer userId) {
         try {
             List<EnergyFootPrint> energyFootprints = energyFootPrintService.getAllEnergyFootprintsForUser(userId);
             return ResponseEntity.ok(energyFootprints);
@@ -162,5 +166,4 @@ public class UsersController {
         }
     }
 
-
-}   
+}

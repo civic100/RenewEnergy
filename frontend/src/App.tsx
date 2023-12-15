@@ -43,7 +43,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contributions" element={<Contributions />} />
-          <Route path='/perfil' element={<UserPerfil />} />
+
 
           {/* Rutas de administrador */}
           {isAdmin && (
@@ -54,7 +54,11 @@ const App: React.FC = () => {
               <Route path="/admin/solarpanels" element={<AdminSolarPanels />} />
             </>
           )}
-  
+          {isAuthenticated && (
+            <>
+              <Route path='/perfil' element={<UserPerfil />} />
+            </>
+          )}
           {/* Rutas de inicio de sesión y registro */}
           {!isAuthenticated && (
             <>
