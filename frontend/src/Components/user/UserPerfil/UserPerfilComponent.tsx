@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSolarPanel, faCloud } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@mui/material';
 import UserPerfilPlaca from './UserPerfilPlaca.tsx';
+import UserPerfilEnergy from './UserPerfilEnergy.tsx';
 
 const UserProfile: React.FC = () => {
     // Obtén el contexto y el valor del usuario
@@ -12,7 +13,7 @@ const UserProfile: React.FC = () => {
     const [updated, setUpdated] = useState(false);
     const [datoPlaca, setDatoPlaca] = useState([]);
     const [datoEnergy, setDatoEnergy] = useState<any>(null);
-    const [solar, setSolar] = useState(true);
+    const [solar, setSolar] = useState(false);
     const [energy, setEnergy] = useState(false);
 
 
@@ -95,11 +96,12 @@ const UserProfile: React.FC = () => {
                 <Button onClick={handleSolar}>Placa Solar</Button>
                 <Button onClick={handleEnergy}>Energy</Button>
             </div>
+
             <div className='contenido'>
                 {solar ? (
                     <UserPerfilPlaca dato={datoPlaca}/>
                 ) : energy ? (
-                    <UserPerfilPlaca dato={datoPlaca}/>
+                    <UserPerfilEnergy dato={datoPlaca}/>
                 ) : null}
             </div>
         </>
@@ -107,3 +109,7 @@ const UserProfile: React.FC = () => {
 };
 
 export default UserProfile;
+
+/*
+
+*/

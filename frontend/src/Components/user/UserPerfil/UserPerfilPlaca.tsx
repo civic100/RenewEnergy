@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import "../../../assets/style/UserPerfil/userPerfilePlaca.css"
 
 const UserPerfilPlaca = ({ dato }) => {
