@@ -76,7 +76,6 @@ const UserProfile: React.FC = () => {
                             <li>
                                 <FontAwesomeIcon icon={faSolarPanel} className='iconito' />
                                 <p>
-
                                     {datoPlaca.length}
                                 </p>
                             </li>
