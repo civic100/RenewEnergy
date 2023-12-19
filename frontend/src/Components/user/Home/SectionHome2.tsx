@@ -1,8 +1,15 @@
 import Style from '../../../assets/style/Home/SectionHome2.module.css';
 import Button from '@mui/material/Button';
 import "../../../assets/style/Button.css";
+import { useNavigate} from 'react-router-dom';
 
 export default function SectionHome2() {
+    const navigate = useNavigate(); // Obtén la función de navegación
+    const handleContribuirClick = () => {
+        // Redirigir a la página de contributions
+        navigate('/projects');
+    };
+
     return (
         <div className={`${Style.homeSe} ${Style.bg1}`}>
             <div className={Style.container}>
@@ -18,7 +25,7 @@ export default function SectionHome2() {
                 </div>
                 
                 <div className={Style.textCenter}>
-                    <Button className='btn-color'> Proyectos </Button>
+                    <Button className='btn-color' onClick={handleContribuirClick}> Proyectos </Button>
                 </div>
             </div>
         </div>

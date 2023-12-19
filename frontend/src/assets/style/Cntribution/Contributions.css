@@ -1,0 +1,45 @@
+/* contribution-component.css */
+
+.service-catalog-header {
+    background: linear-gradient(
+    135deg,
+    #452303,
+    #78430f,
+    #92520e,
+    #b46a09,
+    #d99406,
+    #f5be0c,
+    #fbdc24,
+    #fceb4d,
+    #fdf68a,
+    #fefac7,
+    #fffeeb
+  );
+  background-position: bottom;
+  background-repeat: no-repeat;
+  margin-bottom: 4.5rem;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.service-catalog-header__title {
+  margin-bottom: 4rem;
+}
+.display-2 {
+  font-size: 4.5rem;
+}
+.display-2 {
+  font-family: Manrope,sans-serif;
+  font-size: calc(1.575rem + 1.9vw);
+  line-height: 1;
+  margin: 1;
+}
+.service-catalog-header__subtitle {
+  font-family: Manrope,sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.6;
+  margin: 0 auto 1.5rem;
+  max-width: 37rem;
+}

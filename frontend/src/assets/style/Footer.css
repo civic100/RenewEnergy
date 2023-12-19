@@ -6,8 +6,11 @@
   /* Color de fondo del pie de página */
   color: #fff;
   /* Color del texto */
-  padding: 10px 100px 10px
+  padding: 10px 100px 10px;
     /* Espacio a la izquierda y a la derecha */
+  position: absolute;
+  bottom: 0;
+
 }
 
 .footer-left {

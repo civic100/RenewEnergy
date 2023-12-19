@@ -1,7 +1,12 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
 body{
     margin: 0px;
     padding: 0px;
 }
 .app-container {
     padding: 4rem 0 2rem;
-  }
+    margin-bottom: 80px;
+}

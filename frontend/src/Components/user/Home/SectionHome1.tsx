@@ -7,8 +7,6 @@ import { useNavigate} from 'react-router-dom';
 export default function SectionHome1() {
 
     const navigate = useNavigate(); // Obtén la función de navegación
-  
-
     const handleContribuirClick = () => {
         // Redirigir a la página de contributions
         navigate('/contributions');
