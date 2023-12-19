@@ -1,0 +1,23 @@
+.container{
+    width: 100%;
+    margin-top: -1.5rem;
+    background: hsla(40,23%,97%,.9);
+    padding-bottom: 10rem;
+}
+
+.content{
+    width: 100%;
+    height: 100vh;
+    
+    margin: auto;
+    display: flex;
+}
+
+.projectsList{
+    width: 50%;
+}
+
+.googleMap{
+    width: 50%;
+    text-align: center;
+}

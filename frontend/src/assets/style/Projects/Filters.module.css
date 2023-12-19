@@ -1,0 +1,115 @@
+.filtersSection{
+    background: hsla(40,23%,97%,.9);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+
+    position: sticky;
+    top: 4.4rem;
+    z-index: 1;
+}
+
+.filtersContent{
+    width: 100%;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.items{
+
+    display: flex;
+
+}
+
+.item{
+    margin: 1rem;
+    
+}
+
+.item > input{
+    width: 12rem;
+    padding: 0.5rem;
+    
+    border: 2px solid black;
+    border-radius: 3px;
+    background-color: hsla(40,23%,97%,.9);
+
+    text-align: left;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+
+
+
+.item > input {
+    border-bottom-right-radius:0px;
+    border-top-right-radius:0px;
+}
+
+
+.nameFilter{
+    display: flex;
+    align-items: center;
+}
+
+.nameFilter > span{
+    width: 2rem;
+    padding: 0.4rem;
+
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 3px;
+
+    border-left: none;
+    border-bottom-left-radius:0px;
+    border-top-left-radius:0px;
+}
+
+.sortFilters{
+    display: flex;
+    justify-content: left;
+}
+
+.sortOption{
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.sortButton{
+    border: none;
+    border-radius: 3px;
+    background-color: unset;
+    padding: 0.4rem;
+    
+    cursor: pointer;
+}
+
+.sortButton:hover{
+    background-color: #e9ecef;
+    transition: 
+        color .15s ease-in-out,
+        background-color .15s ease-in-out,
+        border-color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
+}
+
+.sortButton > span {
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+    font-size: .875rem;
+    font-weight: 500!important;
+}
+
+.sortResult{
+    display: flex;
+    align-items: center;
+
+    font-size: .775rem;
+}
