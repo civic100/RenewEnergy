@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '../../../assets/style/Login/Login.css';
 import { UserContext } from '../../user/Context/UserContext';
+import Swal from 'sweetalert2';
 
 interface UserLoginProps {
     onLogin: (userType: string) => void;
@@ -17,6 +18,15 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
 
     const { setUser } = useContext(UserContext);
     const handleLogin = async () => {
+        if(email == "" || password == ""){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Please fill in all required fields"
+            });
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:8080/users/login', {
                 method: 'POST',
@@ -45,7 +55,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
                         name: userData[0].user.name,
                         email: userData[0].user.email,
                         user_type: userData[0].user.user_type,
-                        image_url: userData[0].image_url,
+                        image_url: userData[0].user.image_url,
                         website: userData[0].website,
                         company_name: userData[0].company_name
                     });
@@ -54,6 +64,11 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
                 onLogin(userType);
             } else {
                 // Lógica de manejo de error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error User Name or Password incorrect',
+                });
                 console.error('Error en el inicio de sesión del usuario');
             }
         } catch (error) {
@@ -77,24 +92,24 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
                         <button className="button login__submit" type="button" onClick={handleLogin}>
                             <span className="button__text">Log In Now</span>
                             <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
-                        </button>			
-                </form>
-                <div className="social-login">
-                    <h3>Log in <br/>RenewEnergy </h3>
-                    <div className="social-icons">
-                        <a href="#" className="social-login__icon fab fa-instagram"></a>
-                        <a href="#" className="social-login__icon fab fa-facebook"></a>
-                        <a href="#" className="social-login__icon fab fa-twitter"></a>
+                        </button>
+                    </form>
+                    <div className="social-login">
+                        <h3>Log in <br />RenewEnergy </h3>
+                        <div className="social-icons">
+                            <a href="#" className="social-login__icon fab fa-instagram"></a>
+                            <a href="#" className="social-login__icon fab fa-facebook"></a>
+                            <a href="#" className="social-login__icon fab fa-twitter"></a>
+                        </div>
                     </div>
                 </div>
+                <div className="screen__background">
+                    <span className="screen__background__shape screen__background__shape4"></span>
+                    <span className="screen__background__shape screen__background__shape3"></span>
+                    <span className="screen__background__shape screen__background__shape2"></span>
+                    <span className="screen__background__shape screen__background__shape1"></span>
+                </div>
             </div>
-            <div className="screen__background">
-                <span className="screen__background__shape screen__background__shape4"></span>
-                <span className="screen__background__shape screen__background__shape3"></span>		
-                <span className="screen__background__shape screen__background__shape2"></span>
-                <span className="screen__background__shape screen__background__shape1"></span>
-            </div>		
-        </div>
         </div>
     );
 }
