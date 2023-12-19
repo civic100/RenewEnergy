@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faChevronRight, faEnvelope, faBuilding, faGlobe, faImage } from '@fortawesome/free-solid-svg-icons';
 import '../../assets/style/Register/Register.css'; // Asegúrate de importar el nuevo archivo CSS
+import Swal from 'sweetalert2'
 
 
 const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister }) => {
@@ -36,17 +37,43 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
   };
 
   const handleRegister = async () => {
-    if (formData.user_type === 'normal' && (!formData.email || !formData.password)) {
-      // Aquí puedes manejar la lógica para mostrar un mensaje de error o realizar otras acciones
-      toast("Falta introducir Email/Password")
-      return;
+    let texto = "Please fill in the following fields: ";
+    if (!formData.name) {
+      texto += "UserName, ";
     }
 
-    if (formData.user_type === 'company' && (!formData.email || !formData.password || !formData.company_name)) {
-      // Aquí puedes manejar la lógica para mostrar un mensaje de error o realizar otras acciones
-      toast("Falta introducir Email/Password/Company Name")
-      return;
+    if (!formData.email) {
+      texto += "Email, ";
     }
+
+    if (!formData.password) {
+      texto += "Password, ";
+    }
+
+    if (!formData.image_url) {
+      texto += "Image, ";
+    }
+
+    if (formData.user_type === 'company') {
+      if (!formData.company_name) {
+        texto += "Company Name, ";
+      }
+
+      if (!formData.website) {
+        texto += "WebSite, ";
+      }
+    }
+
+    // Eliminar la coma al final del texto si hay campos vacíos
+    if (texto.endsWith(', ')) {
+      texto = texto.slice(0, -2);
+    }
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: texto,
+    });
     try {
       const response = await fetch('http://localhost:8080/users', {
         method: 'POST',
