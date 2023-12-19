@@ -2,8 +2,18 @@ import GIF from '../../../assets/images/energia-solar-4.gif';
 import Button from '@mui/material/Button';
 import "../../../assets/style/Button.css";
 import Style from '../../../assets/style/Home/SectionHome1.module.css';
+import { useNavigate} from 'react-router-dom';
 
 export default function SectionHome1() {
+
+    const navigate = useNavigate(); // Obtén la función de navegación
+  
+
+    const handleContribuirClick = () => {
+        // Redirigir a la página de contributions
+        navigate('/contributions');
+    };
+
     return (
         <div className={Style.homeheader}>
             <div  className={Style.container}>
@@ -13,7 +23,9 @@ export default function SectionHome1() {
                     La manera más sencilla para que ciudadanas, ciudadanos y empresas contribuyan a la expansión de la energía solar y compensen sus emisiones de CO2, mediante la instalación de paneles solares y la promoción de una huella de carbono neutral.
                     </p>
 
-                    <Button className='btn-color'> Contribuir </Button>
+                    <Button className='btn-color' onClick={handleContribuirClick}>
+                        Contribuir
+                    </Button>
 
                     <div className={Style.homeheadercounter}>
                         <p className={Style.homeheadercountervalue}>3600</p>
