@@ -44,12 +44,8 @@ VALUES
 INSERT INTO userprojects (id_user, id_project, contribution_plan_id)
 VALUES
     (1, 1, 1),
-    (1, 1, 2),
-    (1, 2, 1),
     (1, 2, 2),
     (2, 1, 1),
-    (2, 1, 2),
-    (2, 2, 1),
     (2, 2, 2);
 
 -- Insert energy footprint
@@ -64,7 +60,7 @@ VALUES
     (1, 2, 2, '2022-01-02', 30, 500, 0),
     (2, 2, 1, '2023-01-02', 42, 137.7, 0),
     (2, 2, 2, '2024-01-02', 4, 59.2, 0);
-
+    
 -- Insert administrator
 INSERT INTO admin (password)
 VALUES
