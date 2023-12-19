@@ -1,6 +1,6 @@
 // App.tsx
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useNavigate, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 
 import Projects from './page/user/Projects';
@@ -17,24 +17,29 @@ import RegisterComponent from './Components/Register/RegisterComponent';
 import AdminLogin from './Components/Login/admin/LoginComponent';
 import Error404 from './page/Error404';
 import Footer from './page/Footer';
-//import Footer from './page/Footer';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate(); // Obtén la función de navegación
 
   const handleLogin = (userType: string) => {
     setIsAuthenticated(true);
     setIsAdmin(userType === 'admin');
+    navigate('/');
+
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     setIsAdmin(false);
+    navigate('/');
+
   };
 
   const handleRegister = () => {
     setIsAuthenticated(true);
+    navigate('/');
   };
   console.log(isAuthenticated);
   return (

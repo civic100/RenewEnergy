@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import ImageUpload from '../Global/ImageUpload';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock, faChevronRight, faEnvelope, faBuilding, faGlobe, faImage} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faChevronRight, faEnvelope, faBuilding, faGlobe, faImage } from '@fortawesome/free-solid-svg-icons';
 import '../../assets/style/Register/Register.css'; // Asegúrate de importar el nuevo archivo CSS
+import Swal from 'sweetalert2'
+
 
 const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister }) => {
   const [formData, setFormData] = useState({
@@ -35,6 +37,43 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
   };
 
   const handleRegister = async () => {
+    let texto = "Please fill in the following fields: ";
+    if (!formData.name) {
+      texto += "UserName, ";
+    }
+
+    if (!formData.email) {
+      texto += "Email, ";
+    }
+
+    if (!formData.password) {
+      texto += "Password, ";
+    }
+
+    if (!formData.image_url) {
+      texto += "Image, ";
+    }
+
+    if (formData.user_type === 'company') {
+      if (!formData.company_name) {
+        texto += "Company Name, ";
+      }
+
+      if (!formData.website) {
+        texto += "WebSite, ";
+      }
+    }
+
+    // Eliminar la coma al final del texto si hay campos vacíos
+    if (texto.endsWith(', ')) {
+      texto = texto.slice(0, -2);
+    }
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: texto,
+    });
     try {
       const response = await fetch('http://localhost:8080/users', {
         method: 'POST',
@@ -69,73 +108,75 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
   };
 
   return (
-    <div className="container">
-      <div className="screen" style={{ height: formData.user_type === 'company' ? '800px' : '700px' }}>
-        <div className="screen__content">
-          <form className="register">
-            <div className="register__field">
-              <FontAwesomeIcon icon={faUser} className="register__icon" />
-              <input type="text" className="register__input" placeholder="User name" value={formData.name} onChange={handleInputChange} />
-            </div>
-            <div className="register__field">
-              <FontAwesomeIcon icon={faEnvelope} className="register__icon" />
-              <input type="email" className="register__input" placeholder="Email" value={formData.email} onChange={handleInputChange} />
-            </div>
-            <div className="register__field">
-              <FontAwesomeIcon icon={faLock} className="register__icon" />
-              <input type="password" className="register__input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} />
-            </div>
-            <div className="register__field">
+    <>
+      <div className="container">
+        <div className="screen" style={{ height: formData.user_type === 'company' ? '800px' : '700px' }}>
+          <div className="screen__content">
+            <form className="register">
+              <div className="register__field">
+                <FontAwesomeIcon icon={faUser} className="register__icon" />
+                <input type="text" className="register__input" placeholder="User name" value={formData.name} onChange={handleInputChange} />
+              </div>
+              <div className="register__field">
+                <FontAwesomeIcon icon={faEnvelope} className="register__icon" />
+                <input type="email" className="register__input" placeholder="Email" value={formData.email} onChange={handleInputChange} />
+              </div>
+              <div className="register__field">
+                <FontAwesomeIcon icon={faLock} className="register__icon" />
+                <input type="password" className="register__input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} />
+              </div>
+              <div className="register__field">
 
-              <select name="user_type" className="register__select" value={formData.user_type} onChange={handleInputChange}>
-                <option value="normal">Normal</option>
-                <option value="company">Empresa</option>
-              </select>
-            </div>
-          
+                <select name="user_type" className="register__select" value={formData.user_type} onChange={handleInputChange}>
+                  <option value="normal">Normal</option>
+                  <option value="company">Empresa</option>
+                </select>
+              </div>
+
               {formData.user_type === 'company' && (
                 <>
-                <div className="register__field">
-                  <label>
-                    <FontAwesomeIcon icon={faBuilding} className="register__icon" />
-                    <input type="text"  className="register__input" name="company_name" placeholder="Nombre de la empresa" value={formData.company_name} onChange={handleInputChange} />
-                  </label>
-                </div>
-                <div className="register__field">
-                  <label>
-                  <FontAwesomeIcon icon={faGlobe} className="register__icon" />
-                    <input type="text"  className="register__input" name="website" placeholder="Sitio web" value={formData.website} onChange={handleInputChange} />
-                  </label>
-                </div>
+                  <div className="register__field">
+                    <label>
+                      <FontAwesomeIcon icon={faBuilding} className="register__icon" />
+                      <input type="text" className="register__input" name="company_name" placeholder="Nombre de la empresa" value={formData.company_name} onChange={handleInputChange} />
+                    </label>
+                  </div>
+                  <div className="register__field">
+                    <label>
+                      <FontAwesomeIcon icon={faGlobe} className="register__icon" />
+                      <input type="text" className="register__input" name="website" placeholder="Sitio web" value={formData.website} onChange={handleInputChange} />
+                    </label>
+                  </div>
                 </>
               )}
-          
 
-            <div className="register__field">
-                <p>URL de imagen:<FontAwesomeIcon icon={faImage} className="register__icon register__alin" /></p> 
-              <label>
-                <ImageUpload key={formData.image_url} onImageSelect={handleImageSelect} />
-              </label>
-              {selectedImage && (
-                <p>Imagen seleccionada: {selectedImage.name}</p>
-              )}
-            </div>
 
-            <button className="button register__submit" type="button" onClick={handleRegister}>
-              <span className="button__text">Register</span>
-              <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
-            </button>
+              <div className="register__field">
+                <p>URL de imagen:<FontAwesomeIcon icon={faImage} className="register__icon register__alin" /></p>
+                <label>
+                  <ImageUpload key={formData.image_url} onImageSelect={handleImageSelect} />
+                </label>
+                {selectedImage && (
+                  <p>Imagen seleccionada: {selectedImage.name}</p>
+                )}
+              </div>
+
+              <button className="button register__submit" type="button" onClick={handleRegister}>
+                <span className="button__text">Register</span>
+                <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
+              </button>
             </form>
 
+          </div>
+          <div className="screen__background">
+            <span className="screen__background__shape screen__background__shape4"></span>
+            <span className="screen__background__shape screen__background__shape3"></span>
+            <span className="screen__background__shape screen__background__shape2"></span>
+            <span className="screen__background__shape screen__background__shape1"></span>
+          </div>
+        </div>
       </div>
-      <div className="screen__background">
-          <span className="screen__background__shape screen__background__shape4"></span>
-          <span className="screen__background__shape screen__background__shape3"></span>		
-          <span className="screen__background__shape screen__background__shape2"></span>
-          <span className="screen__background__shape screen__background__shape1"></span>
-      </div>		
-    </div>
-    </div>
+    </>
   );
 };
 
