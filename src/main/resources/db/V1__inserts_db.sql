@@ -31,6 +31,7 @@ INSERT INTO projectsolarpanels (id_project, id_solarpanel)
 VALUES
     (1, 1),
     (1, 2),
+    (2, 1),
     (2, 2);
 
 -- Insert contribution plans
@@ -43,13 +44,26 @@ VALUES
 INSERT INTO userprojects (id_user, id_project, contribution_plan_id)
 VALUES
     (1, 1, 1),
+    (1, 1, 2),
+    (1, 2, 1),
+    (1, 2, 2),
+    (2, 1, 1),
+    (2, 1, 2),
+    (2, 2, 1),
     (2, 2, 2);
 
 -- Insert energy footprint
 INSERT INTO energyfootprint (id_solarpanel, id_user, id_project, date, carbonfootprint, generatedenergy, is_disabled)
 VALUES
-    (1, 1, 1, '2023-01-01', 10.5, 200.3, 0),
-    (2, 2, 2, '2023-01-02', 15.2, 250.1, 0);
+    (1, 1, 1, '2022-01-01', 10.5, 200.3, 0),
+    (1, 1, 2, '2023-01-01', 13, 400.4, 0),
+    (2, 1, 1, '2023-01-01', 23.5, 100.3, 0),
+    (2, 1, 2, '2024-01-01', 5, 20, 0),
+
+    (1, 2, 1, '2022-01-02', 15.2, 250.1, 0),
+    (1, 2, 2, '2022-01-02', 30, 500, 0),
+    (2, 2, 1, '2023-01-02', 42, 137.7, 0),
+    (2, 2, 2, '2024-01-02', 4, 59.2, 0);
 
 -- Insert administrator
 INSERT INTO admin (password)
