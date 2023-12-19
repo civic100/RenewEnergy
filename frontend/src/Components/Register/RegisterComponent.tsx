@@ -4,7 +4,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faChevronRight, faEnvelope, faBuilding, faGlobe, faImage } from '@fortawesome/free-solid-svg-icons';
 import '../../assets/style/Register/Register.css'; // Asegúrate de importar el nuevo archivo CSS
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { isValidEmail } from '../../assets/Utils/ValidationEmail.tsx';
 
 
 const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister }) => {
@@ -19,11 +20,17 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
   });
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
   const handleInputChange = (event) => {
     setFormData((prevData) => ({
       ...prevData,
       [event.target.name]: event.target.value,
     }));
+
+    if (event.target.name === 'email') {
+      setIsEmailValid(isValidEmail(event.target.value));
+    }
   };
 
   const handleImageSelect = (imageFile) => {
@@ -36,75 +43,97 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
     });
   };
 
+  const validateForm = (formData) => {
+    setIsEmailValid(isValidEmail(formData.email));
+
+    return (
+      formData.name &&
+      formData.email &&
+      formData.password &&
+      formData.image_url &&
+      isEmailValid &&
+      (formData.user_type !== 'company' ||
+        (formData.company_name && formData.website))
+    );
+  };
+
   const handleRegister = async () => {
-    let texto = "Please fill in the following fields: ";
-    if (!formData.name) {
-      texto += "UserName, ";
-    }
+    const isFormIncomplete = !validateForm(formData);
 
-    if (!formData.email) {
-      texto += "Email, ";
-    }
-
-    if (!formData.password) {
-      texto += "Password, ";
-    }
-
-    if (!formData.image_url) {
-      texto += "Image, ";
-    }
-
-    if (formData.user_type === 'company') {
-      if (!formData.company_name) {
-        texto += "Company Name, ";
+    if (isFormIncomplete) {
+      let texto = "Please fill in the following fields: ";
+      if (!formData.name) {
+        texto += "UserName, ";
       }
 
-      if (!formData.website) {
-        texto += "WebSite, ";
+      if (!formData.email) {
+        texto += "Email, ";
+      } else if (!isEmailValid) {
+        texto = "Invalid email format, example@example.example ";
       }
-    }
 
-    // Eliminar la coma al final del texto si hay campos vacíos
-    if (texto.endsWith(', ')) {
-      texto = texto.slice(0, -2);
-    }
+      if (!formData.password) {
+        texto += "Password, ";
+      }
 
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: texto,
-    });
-    try {
-      const response = await fetch('http://localhost:8080/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      if (!formData.image_url) {
+        texto += "Image, ";
+      }
 
-      if (response.ok) {
-        if (selectedImage) {
-          const formData = new FormData();
-          formData.append('image', selectedImage);
-
-          await axios.post('http://localhost:8080/images', formData)
-            .then(response => {
-              console.log('Imagen guardada con éxito:', response.data);
-            })
-            .catch(error => {
-              console.error('Error al guardar la imagen:', error);
-            });
+      if (formData.user_type === 'company') {
+        if (!formData.company_name) {
+          texto += "Company Name, ";
         }
 
-        // Luego de un registro exitoso, llamas a la función onRegister para redirigir al usuario al  .
-        onRegister();
-      } else {
-        console.error('Error en el registro:', response.statusText);
+        if (!formData.website) {
+          texto += "WebSite, ";
+        }
       }
-    } catch (error) {
-      console.error('Error en la solicitud:', error);
+
+      // Eliminar la coma al final del texto si hay campos vacíos
+      if (texto.endsWith(', ')) {
+        texto = texto.slice(0, -2);
+      }
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: texto,
+      });
+    } else {
+      try {
+        const response = await fetch('http://localhost:8080/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          if (selectedImage) {
+            const formData = new FormData();
+            formData.append('image', selectedImage);
+
+            await axios.post('http://localhost:8080/images', formData)
+              .then(response => {
+                console.log('Imagen guardada con éxito:', response.data);
+              })
+              .catch(error => {
+                console.error('Error al guardar la imagen:', error);
+              });
+          }
+
+          // Luego de un registro exitoso, llamas a la función onRegister para redirigir al usuario al  .
+          onRegister();
+        } else {
+          console.error('Error en el registro:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
+      }
     }
+
   };
 
   return (
@@ -115,11 +144,11 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
             <form className="register">
               <div className="register__field">
                 <FontAwesomeIcon icon={faUser} className="register__icon" />
-                <input type="text" className="register__input" placeholder="User name" value={formData.name} onChange={handleInputChange} />
+                <input type="text" className="register__input" placeholder="User name" name='name' value={formData.name} onChange={handleInputChange} />
               </div>
               <div className="register__field">
                 <FontAwesomeIcon icon={faEnvelope} className="register__icon" />
-                <input type="email" className="register__input" placeholder="Email" value={formData.email} onChange={handleInputChange} />
+                <input type="email" className="register__input" placeholder="Email" name='email' value={formData.email} onChange={handleInputChange} />
               </div>
               <div className="register__field">
                 <FontAwesomeIcon icon={faLock} className="register__icon" />
@@ -153,9 +182,7 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
 
               <div className="register__field">
                 <p>URL de imagen:<FontAwesomeIcon icon={faImage} className="register__icon register__alin" /></p>
-                <label>
-                  <ImageUpload key={formData.image_url} onImageSelect={handleImageSelect} />
-                </label>
+                <ImageUpload key={formData.image_url} onImageSelect={handleImageSelect} />
                 {selectedImage && (
                   <p>Imagen seleccionada: {selectedImage.name}</p>
                 )}
