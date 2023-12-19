@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '../../../assets/style/Login/Login.css';
 import { UserContext } from '../../user/Context/UserContext';
+
 interface UserLoginProps {
     onLogin: (userType: string) => void;
 }
@@ -15,7 +16,6 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
     const [userType, setUserType] = useState('user'); // Valor predeterminado para usuario normal
 
     const { setUser } = useContext(UserContext);
-
     const handleLogin = async () => {
         try {
             const response = await fetch('http://localhost:8080/users/login', {

@@ -10,6 +10,7 @@ const UserPerfilPlaca = ({ dato }) => {
                         <img src={`http://localhost:8080/images/${item.solarPanel.image_url}`} />
                         <div className="container">
                             <h4><b>{item.solarPanel.model}</b></h4>
+                            <h4><b>{item.project.description}</b></h4>
                         </div>
                     </div>
                 ))}
