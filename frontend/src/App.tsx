@@ -16,6 +16,7 @@ import UserLogin from './Components/Login/user/LoginComponent';
 import RegisterComponent from './Components/Register/RegisterComponent';
 import AdminLogin from './Components/Login/admin/LoginComponent';
 import Error404 from './page/Error404';
+import Footer from './page/Footer';
 //import Footer from './page/Footer';
 
 const App: React.FC = () => {
@@ -37,41 +38,44 @@ const App: React.FC = () => {
   };
   console.log(isAuthenticated);
   return (
-    <div className="app-container">
-      <NavBar isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={handleLogout} />
+    <>
+      <div className="app-container">
+        <NavBar isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={handleLogout} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contributions" element={<Contributions />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contributions" element={<Contributions />} />
 
 
-        {/* Rutas de administrador */}
-        {isAdmin && (
-          <>
-            <Route path="/admin/users" element={<AdminUsers />} />
-            <Route path="/admin/contribution" element={<AdminContribution />} />
-            <Route path="/admin/projects" element={<AdminProjects />} />
-            <Route path="/admin/solarpanels" element={<AdminSolarPanels />} />
-          </>
-        )}
-        {isAuthenticated && (
-          <>
-            <Route path='/perfil' element={<UserPerfil />} />
-          </>
-        )}
-        {/* Rutas de inicio de sesión y registro */}
-        {!isAuthenticated && (
-          <>
-            <Route path="/login" element={<UserLogin onLogin={handleLogin} />} />
-            <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
-            <Route path="/register" element={<RegisterComponent onRegister={handleRegister} />} />
-          </>
-        )}
-        <Route path="/*" element={<Error404 />} />
-      </Routes>
-     
-    </div>
+          {/* Rutas de administrador */}
+          {isAdmin && (
+            <>
+              <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/contribution" element={<AdminContribution />} />
+              <Route path="/admin/projects" element={<AdminProjects />} />
+              <Route path="/admin/solarpanels" element={<AdminSolarPanels />} />
+            </>
+          )}
+          {isAuthenticated && (
+            <>
+              <Route path='/perfil' element={<UserPerfil />} />
+            </>
+          )}
+          {/* Rutas de inicio de sesión y registro */}
+          {!isAuthenticated && (
+            <>
+              <Route path="/login" element={<UserLogin onLogin={handleLogin} />} />
+              <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
+              <Route path="/register" element={<RegisterComponent onRegister={handleRegister} />} />
+            </>
+          )}
+          <Route path="/*" element={<Error404 />} />
+        </Routes>
+
+      </div>
+      <Footer />
+    </>
   );
 };
 

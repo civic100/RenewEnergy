@@ -1,0 +1,29 @@
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    /* Color de fondo del pie de página */
+    color: #fff;
+    /* Color del texto */
+    padding: 10px 100px 10px /* Espacio a la izquierda y a la derecha */
+  }
+  
+  .footer-left {
+    width: 30%;
+    /* Ajusta según sea necesario */
+  }
+  
+  .footer-center {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .footer-right {
+    display: flex;
+    width: 30%;
+    justify-content: right;
+  }
+.img-footer {
+    width: 20%;
+}
