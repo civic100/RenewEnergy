@@ -58,20 +58,7 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
 
             if (response.ok) {
 
-                const responseProjectSolarPanel = await fetch('http://localhost:8080/projectsolarpanels', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        projectId: parseInt(formData.project),
-                        solarpanelId: parseInt(formData.solarpanel),
-                    }),
-                });
-
-                if (responseProjectSolarPanel.ok) {
-
-                    const responsetSolarPanel = await fetch(`http://localhost:8080/solarpanels/${formData.solarpanel}`);
+                const responsetSolarPanel = await fetch(`http://localhost:8080/solarpanels/${formData.solarpanel}`);
 
                     // Obtener datos del panel solar seleccionado
                     const solarpanelData = await responsetSolarPanel.json();
@@ -131,7 +118,6 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                         }
 
                     }
-                }
             } else {
                 console.error('Error en el registro:', response.statusText);
             }

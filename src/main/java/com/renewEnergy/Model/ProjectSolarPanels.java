@@ -22,21 +22,21 @@ public class ProjectSolarPanels {
     private  ProjectSolarPanelId id;
 
     @ManyToOne
-    @JoinColumn(name = "id_project", insertable = false, updatable = false)
+    @JoinColumn(name = "id_project")
     private Projects project;
 
     @ManyToOne
-    @JoinColumn(name = "id_solarpanel", insertable = false, updatable = false)
+    @JoinColumn(name = "id_solarpanel")
     private SolarPanels solarPanel;
 
 
     @Embeddable
     @Data
     public static class ProjectSolarPanelId implements Serializable{
-        @Column(name = "id_project")
+        @Column(name = "id_project", insertable = false, updatable = false)
         private Integer projectId;
-
-        @Column(name = "id_solarpanel")
+    
+        @Column(name = "id_solarpanel", insertable = false, updatable = false)
         private Integer solarpanelId;
 
         @Override
