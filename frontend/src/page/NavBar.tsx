@@ -14,7 +14,7 @@ const NavBar: React.FC<NavBarProps> = ({ isAuthenticated, isAdmin, onLogout }) =
     <div className="menu">
       <nav>
         {isAuthenticated ? (
-          isAdmin ? <AccountMenuAdmin /> : <AccountMenuUser isAuthenticated={isAuthenticated} onLogout={onLogout} />
+          isAdmin ? <AccountMenuAdmin onLogout={onLogout}/> : <AccountMenuUser isAuthenticated={isAuthenticated} onLogout={onLogout} />
         ) : (
           <AccountMenuUser isAuthenticated={isAuthenticated} onLogout={onLogout} />
         )}

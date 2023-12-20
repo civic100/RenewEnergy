@@ -1,5 +1,5 @@
 // IconProfile.tsx
-import React from "react";
+import React, { useContext } from "react";
 
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
@@ -9,15 +9,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import Menu from '@mui/material/Menu';
 import { Link, useHistory } from 'react-router-dom';
-
+import { UserContext } from '../../Components/user/Context/UserContext';
 
 interface IconProfileProps {
     onLogout: () => void;
+    isAdmin: boolean;
 }
 
-const IconProfile: React.FC<IconProfileProps> = ({ onLogout }) => {
+const IconProfile: React.FC<IconProfileProps> = ({ onLogout, isAdmin }) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const { user } = useContext(UserContext);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -37,7 +39,11 @@ const IconProfile: React.FC<IconProfileProps> = ({ onLogout }) => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                    <Avatar sx={{ width: 32, height: 32 }}>A</Avatar>
+                    {isAdmin ? (
+                        <Avatar sx={{ width: 40, height: 40 }}>A</Avatar>
+                    ) : (
+                        <Avatar src={`http://localhost:8080/images/${user.image_url}`} sx={{ width: 40, height: 40 }}></Avatar>
+                    )}
                 </IconButton>
             </Tooltip>
 
@@ -76,9 +82,13 @@ const IconProfile: React.FC<IconProfileProps> = ({ onLogout }) => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem component={Link} to="/perfil" onClick={handleClose}>
-                    <Avatar /> Profile
-                </MenuItem>
+                {isAdmin ? (
+                    null
+                ) : (
+                    <MenuItem component={Link} to="/perfil" onClick={handleClose}>
+                        <Avatar src={`http://localhost:8080/images/${user.image_url}`} sx={{ width: 40, height: 40 }} /> Profile
+                    </MenuItem>
+                )}
                 <MenuItem onClick={onLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
@@ -86,7 +96,7 @@ const IconProfile: React.FC<IconProfileProps> = ({ onLogout }) => {
                     Logout
                 </MenuItem>
             </Menu>
-        </div>
+        </div >
     );
 }
 

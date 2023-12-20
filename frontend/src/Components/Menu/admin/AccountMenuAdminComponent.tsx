@@ -5,8 +5,8 @@ import IconProfile from '../../Global/IconProfile';
 import imgLogo from '../../../assets/images/logo.png';
 
 
-export default function AccountMenuAdmin() {
-  
+export default function AccountMenuAdmin({ onLogout }) {
+
 
   return (
     <div className="container">
@@ -39,7 +39,7 @@ export default function AccountMenuAdmin() {
             </NavLink>
           </div>
           <div className="item">
-            <IconProfile />
+            <IconProfile onLogout={onLogout} isAdmin={true}/>
           </div>
         </div>
       </div>

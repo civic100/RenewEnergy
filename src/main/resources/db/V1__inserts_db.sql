@@ -23,8 +23,8 @@ VALUES
 -- Insert projects
 INSERT INTO projects (description, geographic_area, coordinates, village_name, image_url, is_disabled)
 VALUES
-    ('Project 1', 'Area 1', '40.7128,-74.0060', 'Village 1', 'project_image1.jpg', 0),
-    ('Project 2', 'Area 2', '34.0522,-118.2437', 'Village 2', 'project_image2.jpg', 0);
+    ('Es un pequeño pueblo ubicado en la comunidad autónoma de Castilla y León', 'Soria', '40.7128,-74.0060', 'Villaflor de las Encinas', 'project_image1.jpg', 0),
+    ('Es un pequeño pueblo situado en la comunidad autónoma de Castilla y León', 'Burgos', '34.0522,-118.2437', 'Castrillo del Val', 'project_image2.jpg', 0);
 
 -- Insert relationship between projects and solar panels
 INSERT INTO projectsolarpanels (id_project, id_solarpanel)

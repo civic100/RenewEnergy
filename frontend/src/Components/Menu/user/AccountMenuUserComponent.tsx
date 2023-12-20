@@ -49,7 +49,7 @@ const AccountMenuUser: React.FC<AccountMenuUserProps> = ({ isAuthenticated, onLo
           {isAuthenticated && (
             <>
               <div className='item'>
-                <IconProfile onLogout={onLogout} />
+                <IconProfile onLogout={onLogout} isAdmin={false} />
               </div>
             </>
           )}

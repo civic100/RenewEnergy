@@ -18,7 +18,7 @@ const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
 
     const { setUser } = useContext(UserContext);
     const handleLogin = async () => {
-        if(email == "" || password == ""){
+        if (email == "" || password == "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
