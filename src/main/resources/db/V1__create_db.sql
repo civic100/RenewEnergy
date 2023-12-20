@@ -70,7 +70,6 @@ CREATE TABLE userprojects (
     id_user INTEGER UNSIGNED,
     id_project INTEGER UNSIGNED,
     contribution_plan_id INTEGER UNSIGNED,
-    PRIMARY KEY (id_user, id_project),
     FOREIGN KEY (id_user) REFERENCES users(id_user),
     FOREIGN KEY (id_project) REFERENCES projects(id_project),
     FOREIGN KEY (contribution_plan_id) REFERENCES contributionplans(id_contributionplan)

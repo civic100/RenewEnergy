@@ -38,6 +38,11 @@ export default function AccountMenuAdmin({ onLogout }) {
               Contribución
             </NavLink>
           </div>
+          <div className={navBarStyle.item}>
+            <NavLink to="/admin/payment">
+              Payment
+            </NavLink>
+          </div>
           <div className="item">
             <IconProfile onLogout={onLogout} isAdmin={true}/>
           </div>
