@@ -1,0 +1,21 @@
+.headerProjects{
+    background-color: rgba(255, 196, 0, 0.878);
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.headerContent{
+    width: 100%;
+}
+
+.headerContent .headerTitle{
+    font-size: xxx-large;
+    margin: 0;
+}
+
+.headerContent .headerDescription{
+    font-size: smaller;
+    margin: 1rem auto 0;
+}
