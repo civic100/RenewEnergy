@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import usePaymentState from './PaymentState';
-
-
+import DataTable from '../../Global/DataTable.tsx';
 
 const PaymentComponent = () => {
     const {
         payment,
         setPayment,
-        editPopoverAnchorEl,
-        setEditPopoverAnchorEl,
-        createPopoverAnchorEl,
-        setCreatePopoverAnchorEl,
-        editedPayment,
-        setEditedPayment,
-        clearEditedPayment,
         columns,
-        fields
     } = usePaymentState();
     const [updated, setUpdated] = useState(false);
 
@@ -24,10 +15,16 @@ const PaymentComponent = () => {
             try {
                 const response = await fetch('http://localhost:8080/usersprojects/payment');
                 if (!response.ok) {
-                    throw new Error('Error al obtener los datos de paneles solares');
+                    throw new Error('Error al obtener los datos de payment');
                 }
                 const data = await response.json();
-                console.log(data);
+                const transformedData = data.map(item => ({
+                    id_user: item[0],
+                    id_project: item[1],
+                    amount: item[2],
+                }));
+
+                setPayment(transformedData);
                 setUpdated(true); // Marcar que la actualización se ha realizado
             } catch (error) {
                 console.error('Error:', error);
@@ -38,8 +35,10 @@ const PaymentComponent = () => {
             fetchPayment(); // Realizar la llamada solo si no se ha actualizado
         }
     }, [payment]);
-    return(
-        "hola"
+    return (
+        <>
+            <DataTable columns={columns} data={payment} onEnable={false} onEdit={false} idKey='id_user' />
+        </>
     )
 }
 

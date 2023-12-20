@@ -50,16 +50,40 @@ public class UsersProjectsService {
         List<UsersProjects> up = getAllUsersProjects();
         List<ContributionPlans> cp = contributionPlansService.findAllPayment();
 
+        Map<String, Double> userProjectAmountMap = new HashMap<>();
 
-        for (ContributionPlans contributionPlans : cp) {
-            System.out.println(contributionPlans.getId_contributionplan() + contributionPlans.getPlan_name() + contributionPlans.getAmount() + contributionPlans.getFrequency());
-        }
-
+        // Iterar sobre UsersProjects y ContributionPlans para calcular la suma del
+        // amount
         for (UsersProjects usersProjects : up) {
-            System.out.println(usersProjects.getUser().getId_user() + usersProjects.getProject().getId_project() + usersProjects.getContributionPlans().getId_contributionplan());
+            for (ContributionPlans contributionPlans : cp) {
+                if (usersProjects.getContributionPlans().getId_contributionplan() == contributionPlans
+                        .getId_contributionplan()) {
+
+                    // Construir una clave única para identificar la contribución por usuario y
+                    // proyecto
+                    String key = usersProjects.getUser().getId_user() + "-"
+                            + usersProjects.getProject().getId_project();
+
+                    // Obtener la suma actual y agregar el nuevo amount
+                    double currentSum = userProjectAmountMap.getOrDefault(key, 0.0);
+                    double newAmount = usersProjects.getContributionPlans().getAmount();
+                    userProjectAmountMap.put(key, currentSum + newAmount);
+                }
+            }
         }
 
+        // Construir la lista de resultados a partir del mapa
         List<Object[]> result = new ArrayList<>();
+        for (Map.Entry<String, Double> entry : userProjectAmountMap.entrySet()) {
+            String[] keyParts = entry.getKey().split("-");
+            Long userId = Long.parseLong(keyParts[0]);
+            Long projectId = Long.parseLong(keyParts[1]);
+            Double totalAmount = entry.getValue();
+
+            Object[] row = new Object[] { userId, projectId, totalAmount };
+            result.add(row);
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
+
     }
 }
