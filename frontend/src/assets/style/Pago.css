@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
-.screen {		
+.pago-screen {		
 	background: linear-gradient(90deg, #f5be0c, #fdf68a);		
 	position: relative;	
-	height: 600px;
+	height: 500px;
 	width: 360px;	
 	box-shadow: 0px 0px 24px #d99406;
-	margin-bottom: 180px;
+    overflow-x: hidden; /* Oculta el desplazamiento horizontal */
+    overflow-y: hidden; /* Oculta el desplazamiento vertical */
 }
 
-.screen__content {
+.pago-screen__content {
 	z-index: 1;
 	position: relative;	
 	height: 100%;
 }
 
-.screen__background {		
+.pago-screen__background {		
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -26,12 +27,12 @@
 	clip-path: inset(0 0 0 0);	
 }
 
-.screen__background__shape {
+.pago-screen__background__shape {
 	transform: rotate(45deg);
 	position: absolute;
 }
 
-.screen__background__shape1 {
+.pago-screen__background__shape1 {
 	height: 520px;
 	width: 520px;
 	background: #FFF;	
@@ -40,7 +41,7 @@
 	border-radius: 0 72px 0 0;
 }
 
-.screen__background__shape2 {
+.pago-screen__background__shape2 {
 	height: 220px;
 	width: 220px;
 	background: #fceb4d;	
@@ -49,7 +50,7 @@
 	border-radius: 32px;
 }
 
-.screen__background__shape3 {
+.pago-screen__background__shape3 {
 	height: 540px;
 	width: 190px;
 	background: linear-gradient(270deg, #f5be0c, #fceb4d);
@@ -58,7 +59,7 @@
 	border-radius: 32px;
 }
 
-.screen__background__shape4 {
+.pago-screen__background__shape4 {
 	height: 400px;
 	width: 200px;
 	background: #b46a09;	
@@ -67,23 +68,23 @@
 	border-radius: 60px;
 }
 
-.register {
+.pago {
 	width: 320px;
 	padding: 30px;
 }
 
-.register__field {
+.pago__field {
 	padding: 20px 0px;	
 	position: relative;	
 }
 
-.register__icon {
+.pago__icon {
 	position: absolute;
 	top: 30px;
 	color: #d99406;
 }
 
-.register__input {
+.pago__input {
 	border: none;
 	border-bottom: 2px solid #D1D1D4;
 	background: none;
@@ -94,14 +95,14 @@
 	transition: .2s;
 }
 
-.register__input:active,
-.register__input:focus,
-.register__input:hover {
+.pago__input:active,
+.pago__input:focus,
+.pago__input:hover {
 	outline: none;
 	border-bottom-color: #fceb4d;
 }
 
-.register__submit {
+.pago__submit {
 	background: #fff;
 	font-size: 14px;
 	margin-top: 30px;
@@ -119,42 +120,25 @@
 	transition: .2s;
 }
 
-.register__submit:active,
-.register__submit:focus,
-.register__submit:hover {
+.pago__submit:active,
+.pago__submit:focus,
+.pago__submit:hover {
 	border-color: #fceb4d;
 	outline: none;
 }
 
-.button__icon {
+.pago-button__icon {
 	font-size: 24px;
 	margin-left: auto;
 	color: #d99406;
 }
 
 
-.register__select{
-    border: none;
-    border-bottom: 2px solid #D1D1D4;
-    background: none;
-    padding: 10px;
-    padding-left: 24px;
-    font-weight: 700;
-    width: 40%;
-    transition: .2s;
-}
-.register__select:active,
-.register__select:focus,
-.register__select:hover {
-  outline: none;
-  border-bottom-color: #fceb4d;
-}
-
-.register__alin{
+.pago__alin{
     margin-top: 7px;
 }
 
-.zone{
+.pago-zone{
 	height: 20px;
 	display: flex;
 	align-items: center;

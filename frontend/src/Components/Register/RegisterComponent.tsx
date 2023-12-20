@@ -141,22 +141,22 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
       <div className="container">
         <div className="screen" style={{ height: formData.user_type === 'company' ? '800px' : '700px' }}>
           <div className="screen__content">
-            <form className="register">
-              <div className="register__field">
-                <FontAwesomeIcon icon={faUser} className="register__icon" />
-                <input type="text" className="register__input" placeholder="User name" name='name' value={formData.name} onChange={handleInputChange} />
+            <form className="pago">
+              <div className="pago__field">
+                <FontAwesomeIcon icon={faUser} className="pago__icon" />
+                <input type="text" className="pago__input" placeholder="User name" name='name' value={formData.name} onChange={handleInputChange} />
               </div>
-              <div className="register__field">
-                <FontAwesomeIcon icon={faEnvelope} className="register__icon" />
-                <input type="email" className="register__input" placeholder="Email" name='email' value={formData.email} onChange={handleInputChange} />
+              <div className="pago__field">
+                <FontAwesomeIcon icon={faEnvelope} className="pago__icon" />
+                <input type="email" className="pago__input" placeholder="Email" name='email' value={formData.email} onChange={handleInputChange} />
               </div>
-              <div className="register__field">
-                <FontAwesomeIcon icon={faLock} className="register__icon" />
-                <input type="password" className="register__input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} />
+              <div className="pago__field">
+                <FontAwesomeIcon icon={faLock} className="pago__icon" />
+                <input type="password" className="pago__input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} />
               </div>
-              <div className="register__field">
+              <div className="pago__field">
 
-                <select name="user_type" className="register__select" value={formData.user_type} onChange={handleInputChange}>
+                <select name="user_type" className="pago__select" value={formData.user_type} onChange={handleInputChange}>
                   <option value="normal">Normal</option>
                   <option value="company">Empresa</option>
                 </select>
@@ -164,31 +164,31 @@ const RegisterComponent: React.FC<{ onRegister: () => void }> = ({ onRegister })
 
               {formData.user_type === 'company' && (
                 <>
-                  <div className="register__field">
+                  <div className="pago__field">
                     <label>
-                      <FontAwesomeIcon icon={faBuilding} className="register__icon" />
-                      <input type="text" className="register__input" name="company_name" placeholder="Nombre de la empresa" value={formData.company_name} onChange={handleInputChange} />
+                      <FontAwesomeIcon icon={faBuilding} className="pago__icon" />
+                      <input type="text" className="pago__input" name="company_name" placeholder="Nombre de la empresa" value={formData.company_name} onChange={handleInputChange} />
                     </label>
                   </div>
-                  <div className="register__field">
+                  <div className="pago__field">
                     <label>
-                      <FontAwesomeIcon icon={faGlobe} className="register__icon" />
-                      <input type="text" className="register__input" name="website" placeholder="Sitio web" value={formData.website} onChange={handleInputChange} />
+                      <FontAwesomeIcon icon={faGlobe} className="pago__icon" />
+                      <input type="text" className="pago__input" name="website" placeholder="Sitio web" value={formData.website} onChange={handleInputChange} />
                     </label>
                   </div>
                 </>
               )}
 
 
-              <div className="register__field">
-                <p>URL de imagen:<FontAwesomeIcon icon={faImage} className="register__icon register__alin" /></p>
+              <div className="pago__field">
+                <p>URL de imagen:<FontAwesomeIcon icon={faImage} className="pago__icon pago__alin" /></p>
                 <ImageUpload key={formData.image_url} onImageSelect={handleImageSelect} />
                 {selectedImage && (
                   <p>Imagen seleccionada: {selectedImage.name}</p>
                 )}
               </div>
 
-              <button className="button register__submit" type="button" onClick={handleRegister}>
+              <button className="button pago__submit" type="button" onClick={handleRegister}>
                 <span className="button__text">Register</span>
                 <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
               </button>
