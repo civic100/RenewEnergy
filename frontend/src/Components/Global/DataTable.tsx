@@ -45,17 +45,19 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
         setPage(0);
     };
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{ marginBottom: '100px' }}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         {columns.map((column) => (
                             <StyledTableCell key={column.key} align={column.align}>{column.label}</StyledTableCell>
                         ))}
-                        <StyledTableCell align="right">Update</StyledTableCell>
+                        {onEdit ? (
+                            <StyledTableCell align="right">Update</StyledTableCell>
+                        ) : null}
                         {onEnable ? (
                             <StyledTableCell align="right">Is_disabled</StyledTableCell>
-                        ): null}
+                        ) : null}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -67,18 +69,21 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
                                     <StyledTableCell key={column.key} align={column.align}>
                                         {column.key === 'image_url' ? (
                                             <img src={`http://localhost:8080/images/${row[column.key]}`} alt="Image" style={{ maxWidth: '50px', maxHeight: '50px' }} />
+                                        ) : (
+                                            column.key === 'password' ? (
+                                                '******'
                                             ) : (
-                                                column.key === 'password' ? (
-                                                    '******'
-                                                ): (    
-                                                    row[column.key]
-                                                )
+                                                row[column.key]
+                                            )
                                         )}
                                     </StyledTableCell>
                                 ))}
-                                <StyledTableCell align="right">
-                                    <BtnEdit onClick={(e: any) => onEdit(e, row[idKey])} />
-                                </StyledTableCell>
+                                {onEdit ? (
+                                    <StyledTableCell align="right">
+                                        <BtnEdit onClick={(e: any) => onEdit(e, row[idKey])} />
+                                    </StyledTableCell>
+                                ) : null}
+
                                 {onEnable ? (
                                     <StyledTableCell align="right">
                                         <BtnEnabled classState={row.is_disabled} onClick={() => onEnable(row[idKey])} />

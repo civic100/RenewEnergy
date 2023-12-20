@@ -5,32 +5,27 @@ const usePaymentState = () => {
     const [editPopoverAnchorEl, setEditPopoverAnchorEl] = useState(null);
     const [createPopoverAnchorEl, setCreatePopoverAnchorEl] = useState(null);
     const [editedPayment, setEditedPayment] = useState({
-        id_contributionplan: null,
-        plan_name: '',
+        id_user: null,
+        id_project: null,
         amount: '',
-        frequency: ''
     });
 
     const clearEditedPayment = () => {
         setEditedPayment({
-            id_contributionplan: null,
-            plan_name: '',
+            id_user: null,
+            id_project: null,
             amount: '',
-            frequency: ''
         });
     };
 
     const columns = [
-        { key: 'id_solarpanel', label: 'Id', align: 'right' },
-        { key: 'plan_name', label: 'Name', align: 'right' },
-        { key: 'amount', label: 'Importe', align: 'right' },
-        { key: 'frequency', label: 'Frequency', align: 'right' }
+        { key: 'id_user', label: 'User', align: 'center' },
+        { key: 'id_project', label: 'Project', align: 'center' },
+        { key: 'amount', label: 'Importe', align: 'center' },
     ];
 
     const fields = [
-        { name: 'plan_name', label: 'Name', type: 'text' },
-        { name: 'amount', label: 'Importe', type: 'number' },
-        { name: 'frequency', label: 'Frequency', type: 'text' }
+        { name: 'amount', label: 'Importe', type: 'text' },
     ];
 
     return {
