@@ -12,19 +12,22 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
     const { user } = useContext(UserContext);
 
     const [formData, setFormData] = useState({
-        //project: null,
+        project: 0,
+        solarpanel: 0,
         plan_name: '',
         amount: null,
         frequency: 'weekly',
-        //id_user:  user.id_user,
+        id_user: user.id_user,
     });
 
     const [projects, setProjects] = useState([]); // Estado para almacenar la lista de proyectos
+    const [solarpanels, setSolarpanles] = useState([]); // Estado para almacenar la lista de solar panels
 
     const handleInputChange = (event) => {
+        const value = event.target.type === 'number' ? parseInt(event.target.value, 10) : event.target.value;
         setFormData((prevData) => ({
             ...prevData,
-            [event.target.name]: event.target.value,
+            [event.target.name]: value,
         }));
     };
 
@@ -39,20 +42,102 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
             formData.plan_name = 'Annual plan';
         }
 
-        console.log(JSON.stringify(formData));
         try {
-            const response = await fetch('http://localhost:8080/payment/insert', {
+
+            const response = await fetch('http://localhost:8080/payment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    plan_name: formData.plan_name,
+                    amount: formData.amount,
+                    frequency: formData.frequency,
+                }),
             });
 
-
-
             if (response.ok) {
-                console.log('Registro exitoso');
+
+                const responseProjectSolarPanel = await fetch('http://localhost:8080/projectsolarpanels', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        projectId: parseInt(formData.project),
+                        solarpanelId: parseInt(formData.solarpanel),
+                    }),
+                });
+
+                
+                console.log( JSON.stringify({
+                    projectId: parseInt(formData.project),
+                    solarpanelId: parseInt(formData.solarpanel),
+                }));
+
+
+                console.error('Error en el registro:', responseProjectSolarPanel.statusText);
+
+                if (responseProjectSolarPanel.ok) {
+
+                    const responsetSolarPanel = await fetch(`http://localhost:8080/solarpanels/${formData.solarpanel}`);
+                
+                    // Obtener datos del panel solar seleccionado
+                    const solarpanelData = await responsetSolarPanel.json();
+
+                    // Calcular generatedenergy y carbonfootprint
+                    const nominalpower = solarpanelData.nominalpower; // Reemplaza con el campo real de tu respuesta
+                    const efficiency = solarpanelData.efficiency; // Reemplaza con el campo real de tu respuesta
+
+                    const generatedenergy = nominalpower; // Cambia según la fórmula real
+                    const carbonfootprint = efficiency * nominalpower; // Cambia según la fórmula real
+                    console.log(generatedenergy);
+                    console.log(carbonfootprint);
+
+
+                    // Guardar generatedenergy y carbonfootprint en el estado o donde lo necesites
+                    setFormData((prevData) => ({
+                        ...prevData,
+                        generatedenergy,
+                        carbonfootprint,
+                    }));
+
+                    const currentDate = new Date();
+                    const year = currentDate.getFullYear();
+                    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+                    const day = currentDate.getDate().toString().padStart(2, '0');
+                    const formattedDate = `${year}-${month}-${day}`;
+
+                    // Solicitud para energyfootprint
+                    const responseEnergyfootprint = await fetch('http://localhost:8080/energyfootprint', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            project: formData.project,
+                            solarPanel: formData.solarpanel,
+                            user: formData.id_user,
+                            date: formattedDate,
+                            carbonfootprint,
+                            generatedenergy,
+                        }),
+                        
+                    });
+                    console.log( JSON.stringify({
+                            project: formData.project,
+                            solarPanel: formData.solarpanel,
+                            user: formData.id_user,
+                            date: formattedDate,
+                            carbonfootprint,
+                            generatedenergy,
+                    }));
+    
+                    
+                    if (responseEnergyfootprint.ok) {
+                        console.log('Registro exitoso');
+                    }
+                }
             } else {
                 console.error('Error en el registro:', response.statusText);
             }
@@ -66,9 +151,13 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
         const fetchProjects = async () => {
             try {
                 const response = await fetch('http://localhost:8080/projects');
-                if (response.ok) {
+                const response2 = await fetch('http://localhost:8080/solarpanels');
+                if (response.ok && response2.ok) {
                     const projectsData = await response.json();
+                    const solarpanelsData = await response2.json();
                     setProjects(projectsData);
+                    setSolarpanles(solarpanelsData);
+
                 } else {
                     console.error('Error al obtener la lista de proyectos:', response.statusText);
                 }
@@ -111,8 +200,26 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                                     Selecciona un proyecto
                                 </option>
                                 {projects.map((project) => (
-                                    <option key={project.id_project} value={project.id_project}>
+                                    <option key={project.id_project} value={parseInt(project.id_project)}>
                                         {project.description}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="register__field">
+                            <FontAwesomeIcon icon={faDiagramProject} className="register__icon" />
+                            <select
+                                name="solarpanel"
+                                className="register__select"
+                                value={formData.solarpanel}
+                                onChange={handleInputChange}
+                            >
+                                <option value="" disabled>
+                                    Selecciona un Solar Panel
+                                </option>
+                                {solarpanels.map((solarpanel) => (
+                                    <option key={solarpanel.id_solarpanel} value={parseInt(solarpanel.id_solarpanel)}>
+                                        {solarpanel.model}
                                     </option>
                                 ))}
                             </select>
@@ -128,6 +235,8 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                                     name="amount"
                                     value={formData.amount}
                                     onChange={handleInputChange}
+                                    min={1}
+                                    max={300}
                                 />
                             </div>
                         ) : tipo === 'pagar2' ? (
@@ -139,9 +248,9 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                                     value={formData.amount}
                                     onChange={handleInputChange}
                                 >
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="15">15</option>
+                                    <option value="5">5 €</option>
+                                    <option value="10">10 €</option>
+                                    <option value="15">15 €</option>
                                 </select>
                             </div>
                         ) : null}

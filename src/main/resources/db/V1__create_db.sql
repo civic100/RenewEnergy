@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS projects (
 
 -- Relationship table between projects and solar panels
 CREATE TABLE projectsolarpanels (
+    id_projectsolarpanels INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_project INTEGER UNSIGNED,
     id_solarpanel INTEGER UNSIGNED,
-    PRIMARY KEY (id_project, id_solarpanel),
     FOREIGN KEY (id_project) REFERENCES projects(id_project),
     FOREIGN KEY (id_solarpanel) REFERENCES solarpanels(id_solarpanel)
 );
