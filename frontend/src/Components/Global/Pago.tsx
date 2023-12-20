@@ -69,19 +69,10 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                     }),
                 });
 
-                
-                console.log( JSON.stringify({
-                    projectId: parseInt(formData.project),
-                    solarpanelId: parseInt(formData.solarpanel),
-                }));
-
-
-                console.error('Error en el registro:', responseProjectSolarPanel.statusText);
-
                 if (responseProjectSolarPanel.ok) {
 
                     const responsetSolarPanel = await fetch(`http://localhost:8080/solarpanels/${formData.solarpanel}`);
-                
+
                     // Obtener datos del panel solar seleccionado
                     const solarpanelData = await responsetSolarPanel.json();
 
@@ -91,9 +82,6 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
 
                     const generatedenergy = nominalpower; // Cambia según la fórmula real
                     const carbonfootprint = efficiency * nominalpower; // Cambia según la fórmula real
-                    console.log(generatedenergy);
-                    console.log(carbonfootprint);
-
 
                     // Guardar generatedenergy y carbonfootprint en el estado o donde lo necesites
                     setFormData((prevData) => ({
@@ -109,33 +97,39 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                     const formattedDate = `${year}-${month}-${day}`;
 
                     // Solicitud para energyfootprint
-                    const responseEnergyfootprint = await fetch('http://localhost:8080/energyfootprint', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            project: formData.project,
-                            solarPanel: formData.solarpanel,
-                            user: formData.id_user,
+
+                    const responseProject = await fetch(`http://localhost:8080/projects/${formData.project}`);
+                    const responseUser = await fetch(`http://localhost:8080/users/${formData.id_user}`);
+
+                    if (responseProject.ok && responseUser.ok && responsetSolarPanel.ok) {
+                        const responseEnergyfootprint = await fetch('http://localhost:8080/energyfootprint', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                project: { id_project: formData.project },  // Pasar solo el identificador
+                                solarPanel: { id_solarpanel: formData.solarpanel },  // Pasar solo el identificador
+                                user: { id_user: formData.id_user },
+                                date: formattedDate,
+                                carbonfootprint,
+                                generatedenergy,
+                            }),
+
+                        });
+                        console.log(JSON.stringify({
+                            project: { id_project: formData.project },  // Pasar solo el identificador
+                            solarPanel: { id_solarpanel: formData.solarpanel },  // Pasar solo el identificador
+                            user: { id_user: formData.id_user },
                             date: formattedDate,
                             carbonfootprint,
                             generatedenergy,
-                        }),
-                        
-                    });
-                    console.log( JSON.stringify({
-                            project: formData.project,
-                            solarPanel: formData.solarpanel,
-                            user: formData.id_user,
-                            date: formattedDate,
-                            carbonfootprint,
-                            generatedenergy,
-                    }));
-    
-                    
-                    if (responseEnergyfootprint.ok) {
-                        console.log('Registro exitoso');
+                        }));
+
+                        if (responseEnergyfootprint.ok) {
+                            console.log('Registro exitoso');
+                        }
+
                     }
                 }
             } else {
