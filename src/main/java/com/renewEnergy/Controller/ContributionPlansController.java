@@ -17,6 +17,7 @@ import com.renewEnergy.Model.ContributionPlans;
 import com.renewEnergy.Model.ContributionPlansDTO;
 import com.renewEnergy.Service.ContributionPlansService;
 
+
 @RestController
 @RequestMapping("/payment")
 @CrossOrigin
@@ -40,5 +41,5 @@ public class ContributionPlansController {
 	@PutMapping("{id}")
 	public void putPayment(@RequestBody ContributionPlansDTO contributionPlansDTO,@PathVariable Integer id){
         contributionPlansService.putPayment(contributionPlansDTO, id);
-    }
+    }    
 }

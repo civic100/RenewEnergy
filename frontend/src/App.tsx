@@ -10,11 +10,12 @@ import AdminUsers from './page/admin/Users';
 import AdminContribution from './page/admin/Contribution';
 import AdminProjects from './page/admin/Projects';
 import AdminSolarPanels from './page/admin/SolarPanels';
+import AdminLogin from './Components/Login/admin/LoginComponent';
+import AdminPayment from './page/admin/Payment';
 import Home from './page/Home';
 import NavBar from './page/NavBar';
 import UserLogin from './Components/Login/user/LoginComponent';
 import RegisterComponent from './Components/Register/RegisterComponent';
-import AdminLogin from './Components/Login/admin/LoginComponent';
 import Error404 from './page/Error404';
 import Footer from './page/Footer';
 
@@ -56,6 +57,7 @@ const App: React.FC = () => {
           {/* Rutas de administrador */}
           {isAdmin && (
             <>
+              <Route path='/admin/payment' element={<AdminPayment />}/>
               <Route path="/admin/users" element={<AdminUsers />} />
               <Route path="/admin/contribution" element={<AdminContribution />} />
               <Route path="/admin/projects" element={<AdminProjects />} />
