@@ -6,8 +6,7 @@ function Header() {
       <div className={Style.headerContent}>
         <h1 className={Style.headerTitle}>Proyectos de instalación</h1>
         <p className={Style.headerDescription}>
-          Descubre todos los proyectos de siembra de árboles en los que puedes
-          plantar{" "}
+          Descubre todos los proyectos de instalación de placas solares en los que puedes contribuir
           <a
             href="https://kb.tree-nation.com/es/knowledge/los-proyectos"
             className="subtitle__kb-icon"
