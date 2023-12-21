@@ -35,4 +35,8 @@ public class ProjectSolarPanelService {
         ProjectSolarPanels projectSolarPanels = new ProjectSolarPanels(projectSolarPanelId, projects,solarPanels );
         projectSolarPanelsRepository.save(projectSolarPanels);
     }
+
+    public List<ProjectSolarPanels> obtenerProjectSolarPanelsPorIdProyecto(Integer projectId) {
+        return projectSolarPanelsRepository.findSolarPanelsByIdProject(projectId);
+    }
 }

@@ -26,8 +26,9 @@ public class ContributionPlansService {
 		return payment.findById(id);
 	}
 
-	public void addPayment(ContributionPlansDTO contributionPlansDTO) {
-		payment.save(new ContributionPlans(contributionPlansDTO));
+	public ContributionPlans addPayment(ContributionPlansDTO contributionPlansDTO) {
+		ContributionPlans savedContributionPlans = payment.save(new ContributionPlans(contributionPlansDTO));
+		return savedContributionPlans;
 	}
 
 	public void putPayment(ContributionPlansDTO contributionPlansDTO, Integer id) {

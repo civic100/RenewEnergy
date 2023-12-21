@@ -3,7 +3,6 @@ import Style from '../../assets/style/Home/SectionHome3.module.css';
 import plant from "../../assets/images/plant.svg"
 import family from "../../assets/images/offset-family.svg"
 import { useState } from 'react';
-import DataForm from "./DataForm";
 import Pago from "./Pago";
 
 const Planes = () => {
