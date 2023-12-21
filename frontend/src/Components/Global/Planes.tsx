@@ -43,7 +43,7 @@ const Planes = () => {
                                             <i className="fas fa-euro-sign" aria-hidden="true"></i>Desde 0,25 € /panel solar
                                         </p>
                                         <p className={Style.serviceBoxFeature}>
-                                            <i className="fas fa-sync" aria-hidden="true"></i>Una vez / Mensual / Anual
+                                            <i className="fas fa-sync" aria-hidden="true"></i>Semanal / Mensual / Anual
                                         </p>
                                     </div>
                                 </div>

@@ -38,7 +38,7 @@ export default function ProjectsComponent() {
 
       // Filtrar proyectos
       if (filterValue !== "") {
-        data = data.filter((el: any) => el.village_name.toLowerCase().includes(filterValue.toLowerCase()));
+        data = data.filter((el: any) => el.geographic_area.toLowerCase().includes(filterValue.toLowerCase()));
       }
       setProjects(data);
       setUpdated(true);
@@ -62,12 +62,12 @@ export default function ProjectsComponent() {
   };
 
   const handleSortButtonClick = (orderType: "asc" | "desc") => {
-    // Ordenar proyectos por village_name
+    // Ordenar proyectos por geographic_area
     const sortedProjects = [...projects].sort((a, b) => {
       if (orderType === "asc") {
-        return a.village_name.localeCompare(b.village_name);
+        return a.geographic_area.localeCompare(b.geographic_area);
       } else {
-        return b.village_name.localeCompare(a.village_name);
+        return b.geographic_area.localeCompare(a.geographic_area);
       }
     });
 
@@ -100,7 +100,7 @@ export default function ProjectsComponent() {
             <Project
               key={project.id_project}
               image={project.image_url}
-              title={project.village_name}
+              title={project.geographic_area}
               numReviews="3"
               description={project.description}
               myContributions="1"
