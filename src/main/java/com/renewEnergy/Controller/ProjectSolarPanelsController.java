@@ -34,6 +34,11 @@ public class ProjectSolarPanelsController {
         return projectSolarPanelService.getProjectSolarPanelsById(id);
     }
 
+    @GetMapping("/{projectId}")
+    public List<ProjectSolarPanels> getProjectSolarPanelsByIdProject(@PathVariable Integer projectId){
+        return projectSolarPanelService.obtenerProjectSolarPanelsPorIdProyecto(projectId);
+    }
+
     @PostMapping()
     public void saveProjectSolarPanel(@RequestBody ProjectSolarPanelId projectSolarPanelId) {
         projectSolarPanelService.saveProjectSolarPanel(projectSolarPanelId);

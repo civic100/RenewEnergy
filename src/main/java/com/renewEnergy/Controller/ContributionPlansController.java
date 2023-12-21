@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,9 +37,10 @@ public class ContributionPlansController {
 		return contributionPlansService.findPaymentById(id);
 	}
     @PostMapping()
-    public void addPayment(@RequestBody ContributionPlansDTO contributionPlansDTO){
-        contributionPlansService.addPayment(contributionPlansDTO);
-    }
+    public ResponseEntity<Integer> addPayment(@RequestBody ContributionPlansDTO contributionPlansDTO) {
+    ContributionPlans savedContributionPlans = contributionPlansService.addPayment(contributionPlansDTO);
+    return new ResponseEntity<>(savedContributionPlans.getId_contributionplan(), HttpStatus.CREATED);
+}
 	@PutMapping("{id}")
 	public void putPayment(@RequestBody ContributionPlansDTO contributionPlansDTO,@PathVariable Integer id){
         contributionPlansService.putPayment(contributionPlansDTO, id);

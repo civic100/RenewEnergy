@@ -24,6 +24,7 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
     const [solarpanels, setSolarpanles] = useState([]); // Estado para almacenar la lista de solar panels
 
     const handleInputChange = (event) => {
+
         const value = event.target.type === 'number' ? parseInt(event.target.value, 10) : event.target.value;
         setFormData((prevData) => ({
             ...prevData,
@@ -55,69 +56,83 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                     frequency: formData.frequency,
                 }),
             });
-
             if (response.ok) {
+
+                const responseProjectSolarPanel = await fetch('http://localhost:8080/projectsolarpanels', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        projectId: parseInt(formData.project),
+                        solarpanelId: parseInt(formData.solarpanel),
+                    }),
+                });
+
+                if (responseProjectSolarPanel.ok) {
 
                 const responsetSolarPanel = await fetch(`http://localhost:8080/solarpanels/${formData.solarpanel}`);
 
-                    // Obtener datos del panel solar seleccionado
-                    const solarpanelData = await responsetSolarPanel.json();
+                // Obtener datos del panel solar seleccionado
+                const solarpanelData = await responsetSolarPanel.json();
 
-                    // Calcular generatedenergy y carbonfootprint
-                    const nominalpower = solarpanelData.nominalpower; // Reemplaza con el campo real de tu respuesta
-                    const efficiency = solarpanelData.efficiency; // Reemplaza con el campo real de tu respuesta
+                // Calcular generatedenergy y carbonfootprint
+                const nominalpower = solarpanelData.nominalpower; // Reemplaza con el campo real de tu respuesta
+                const efficiency = solarpanelData.efficiency; // Reemplaza con el campo real de tu respuesta
 
-                    const generatedenergy = nominalpower; // Cambia según la fórmula real
-                    const carbonfootprint = efficiency * nominalpower; // Cambia según la fórmula real
+                const generatedenergy = nominalpower; // Cambia según la fórmula real
+                const carbonfootprint = efficiency * nominalpower; // Cambia según la fórmula real
 
-                    // Guardar generatedenergy y carbonfootprint en el estado o donde lo necesites
-                    setFormData((prevData) => ({
-                        ...prevData,
-                        generatedenergy,
-                        carbonfootprint,
-                    }));
+                // Guardar generatedenergy y carbonfootprint en el estado o donde lo necesites
+                setFormData((prevData) => ({
+                    ...prevData,
+                    generatedenergy,
+                    carbonfootprint,
+                }));
 
-                    const currentDate = new Date();
-                    const year = currentDate.getFullYear();
-                    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-                    const day = currentDate.getDate().toString().padStart(2, '0');
-                    const formattedDate = `${year}-${month}-${day}`;
+                const currentDate = new Date();
+                const year = currentDate.getFullYear();
+                const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+                const day = currentDate.getDate().toString().padStart(2, '0');
+                const formattedDate = `${year}-${month}-${day}`;
 
-                    // Solicitud para energyfootprint
+                // Solicitud para energyfootprint
 
-                    const responseProject = await fetch(`http://localhost:8080/projects/${formData.project}`);
-                    const responseUser = await fetch(`http://localhost:8080/users/${formData.id_user}`);
 
-                    if (responseProject.ok && responseUser.ok && responsetSolarPanel.ok) {
-                        const responseEnergyfootprint = await fetch('http://localhost:8080/energyfootprint', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                project: { id_project: formData.project },  // Pasar solo el identificador
-                                solarPanel: { id_solarpanel: formData.solarpanel },  // Pasar solo el identificador
-                                user: { id_user: formData.id_user },
-                                date: formattedDate,
-                                carbonfootprint,
-                                generatedenergy,
-                            }),
+                const responseProject = await fetch(`http://localhost:8080/projects/${formData.project}`);
+                const responseUser = await fetch(`http://localhost:8080/users/${formData.id_user}`);
 
-                        });
-                        console.log(JSON.stringify({
+                if (responseProject.ok && responseUser.ok && responsetSolarPanel.ok) {
+                    const responseEnergyfootprint = await fetch('http://localhost:8080/energyfootprint', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
                             project: { id_project: formData.project },  // Pasar solo el identificador
                             solarPanel: { id_solarpanel: formData.solarpanel },  // Pasar solo el identificador
                             user: { id_user: formData.id_user },
                             date: formattedDate,
                             carbonfootprint,
                             generatedenergy,
-                        }));
+                        }),
 
-                        if (responseEnergyfootprint.ok) {
-                            console.log('Registro exitoso');
-                        }
+                    });
+                    console.log(JSON.stringify({
+                        project: { id_project: formData.project },  // Pasar solo el identificador
+                        solarPanel: { id_solarpanel: formData.solarpanel },  // Pasar solo el identificador
+                        user: { id_user: formData.id_user },
+                        date: formattedDate,
+                        carbonfootprint,
+                        generatedenergy,
+                    }));
+
+                    if (responseEnergyfootprint.ok) {
+                        console.log('Registro exitoso');
+                    }
 
                     }
+                }
             } else {
                 console.error('Error en el registro:', response.statusText);
             }
@@ -131,13 +146,12 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
         const fetchProjects = async () => {
             try {
                 const response = await fetch('http://localhost:8080/projects');
-                const response2 = await fetch('http://localhost:8080/solarpanels');
+                const response2 = await fetch('http://localhost:8080/solarpanels')
                 if (response.ok && response2.ok) {
                     const projectsData = await response.json();
-                    const solarpanelsData = await response2.json();
+                    const solarpanelData = await response2.json();
                     setProjects(projectsData);
-                    setSolarpanles(solarpanelsData);
-
+                    setSolarpanles(solarpanelData);
                 } else {
                     console.error('Error al obtener la lista de proyectos:', response.statusText);
                 }
@@ -181,7 +195,7 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                                 </option>
                                 {projects.map((project) => (
                                     <option key={project.id_project} value={parseInt(project.id_project)}>
-                                        {project.description}
+                                        {project.geographic_area}
                                     </option>
                                 ))}
                             </select>
