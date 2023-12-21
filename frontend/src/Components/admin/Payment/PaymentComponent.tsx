@@ -37,7 +37,7 @@ const PaymentComponent = () => {
     }, [payment]);
     return (
         <>
-            <DataTable columns={columns} data={payment} onEnable={false} onEdit={false} idKey='id_user' />
+            <DataTable columns={columns} data={payment} onEnable={false} onEdit={false} idKey={['id_user', 'id_project']} />
         </>
     )
 }

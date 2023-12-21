@@ -44,6 +44,17 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    const extractKey = (row) => {
+        if (Array.isArray(idKey)) {
+            // Si idKeys es un array, construye la clave única utilizando sus valores
+            return idKey.map((key) => row[key]).join('-');
+        } else {
+            // Si idKeys no es un array, usa la clave proporcionada directamente
+            return row[idKey];
+        }
+    };
+
     return (
         <TableContainer component={Paper} style={{ marginBottom: '100px' }}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -64,7 +75,7 @@ const DataTable = ({ columns, data, onEnable, onEdit, idKey }) => {
                     {(rowsPerPage > 0
                         ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         : data).map((row: any) => (
-                            <StyledTableRow key={row[idKey]}>
+                            <StyledTableRow key={extractKey(row)}>
                                 {columns.map((column: any) => (
                                     <StyledTableCell key={column.key} align={column.align}>
                                         {column.key === 'image_url' ? (

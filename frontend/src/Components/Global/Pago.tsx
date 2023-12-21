@@ -57,19 +57,9 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                 }),
             });
             if (response.ok) {
-
-                const responseProjectSolarPanel = await fetch('http://localhost:8080/projectsolarpanels', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        projectId: parseInt(formData.project),
-                        solarpanelId: parseInt(formData.solarpanel),
-                    }),
-                });
-
-                if (responseProjectSolarPanel.ok) {
+                const responseBody = await response.json();
+                const idContribucionRecienCreado = responseBody;
+                console.log(idContribucionRecienCreado)
 
                 const responsetSolarPanel = await fetch(`http://localhost:8080/solarpanels/${formData.solarpanel}`);
 
@@ -131,8 +121,21 @@ const Pago = ({ onClose, anchorEl, tipo }) => {
                         console.log('Registro exitoso');
                     }
 
+                    if (responseEnergyfootprint.ok) {
+                        const responseUserproject = await fetch(`http://localhost:8080/usersprojects`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                "userId": formData.id_user,
+                                "projectId": formData.project,
+                                "paymentId": idContribucionRecienCreado
+                            }),
+                        });
                     }
                 }
+                onClose();
             } else {
                 console.error('Error en el registro:', response.statusText);
             }

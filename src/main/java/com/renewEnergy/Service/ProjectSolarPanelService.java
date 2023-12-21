@@ -13,7 +13,7 @@ import com.renewEnergy.Model.SolarPanels;
 
 @Service
 public class ProjectSolarPanelService {
-    
+
     @Autowired
     private ProjectSolarPanelsRepository projectSolarPanelsRepository;
     @Autowired
@@ -21,18 +21,22 @@ public class ProjectSolarPanelService {
     @Autowired
     private SolarPanelsService solarPanelsService;
 
-    public List<ProjectSolarPanels> getAllProjectSolarPanels(){
+    public List<ProjectSolarPanels> getAllProjectSolarPanels() {
         return projectSolarPanelsRepository.findAll();
     }
 
-    public ProjectSolarPanels getProjectSolarPanelsById(ProjectSolarPanelId id){
+    public ProjectSolarPanels getProjectSolarPanelsById(ProjectSolarPanelId id) {
         return projectSolarPanelsRepository.findById(id).orElse(null);
     }
-    public void saveProjectSolarPanel(ProjectSolarPanelId projectSolarPanelId){
-        Projects projects = projectsService.findProjectsById(projectSolarPanelId.getProjectId()).get();
-        SolarPanels solarPanels = solarPanelsService.findSolarPanelsById(projectSolarPanelId.getSolarpanelId()).get();
 
-        ProjectSolarPanels projectSolarPanels = new ProjectSolarPanels(projectSolarPanelId, projects,solarPanels );
+    public void saveProjectSolarPanel(ProjectSolarPanelId projectSolarPanelId) {
+        Projects projects = projectsService.findProjectsById(projectSolarPanelId.getProjectId())
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+
+        SolarPanels solarPanels = solarPanelsService.findSolarPanelsById(projectSolarPanelId.getSolarpanelId())
+                .orElseThrow(() -> new IllegalArgumentException("Solar panel not found"));
+
+        ProjectSolarPanels projectSolarPanels = new ProjectSolarPanels(projectSolarPanelId, projects, solarPanels);
         projectSolarPanelsRepository.save(projectSolarPanels);
     }
 
